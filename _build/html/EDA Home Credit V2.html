@@ -380,10 +380,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">Introducción</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivos-del-eda">Objetivos del EDA</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anadimos-un-script-para-potenciar-el-funcionamiento-del-jupyter-notebook">Añadimos un script para potenciar el funcionamiento del jupyter notebook</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivos-del-eda">Objetivos del EDA</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carga-de-datos">Carga de datos</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diccionario-de-datos">Diccionario de datos</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-descriptivo-de-los-datos">Análisis Descriptivo de los datos</a></li>
@@ -478,163 +475,6 @@ document.write(`
 <li><p>Estudiar correlaciones y relaciones entre variables: Determinar qué factores pueden estar asociados con el riesgo de incumplimiento.
 Visualizar los datos de manera efectiva: Utilizar gráficos e histogramas para detectar tendencias y posibles anomalías.</p></li>
 </ol>
-<section id="anadimos-un-script-para-potenciar-el-funcionamiento-del-jupyter-notebook">
-<h3>Añadimos un script para potenciar el funcionamiento del jupyter notebook<a class="headerlink" href="#anadimos-un-script-para-potenciar-el-funcionamiento-del-jupyter-notebook" title="Link to this heading">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">gc</span>
-<span class="kn">import</span> <span class="nn">multiprocessing</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
-<span class="c1"># 🌟 1️⃣ Verificar si hay GPU disponible (para NVIDIA)</span>
-<span class="k">try</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">torch</span>
-    <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
-        <span class="n">gpu_name</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">get_device_name</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ GPU Detectada: </span><span class="si">{</span><span class="n">gpu_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;CUDA_LAUNCH_BLOCKING&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;1&quot;</span>  <span class="c1"># Debug de errores de GPU</span>
-        <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">empty_cache</span><span class="p">()</span>  <span class="c1"># Liberar caché de la GPU</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;⚠️ No se detectó GPU. Se usará CPU.&quot;</span><span class="p">)</span>
-<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;⚠️ PyTorch no está instalado. Instálalo con: pip install torch torchvision torchaudio&quot;</span><span class="p">)</span>
-
-<span class="c1"># 🔥 2️⃣ Verificar si TensorFlow puede usar la GPU</span>
-<span class="k">try</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
-    <span class="n">gpus</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">list_physical_devices</span><span class="p">(</span><span class="s1">&#39;GPU&#39;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">gpus</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ TensorFlow detectó </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">gpus</span><span class="p">)</span><span class="si">}</span><span class="s2"> GPU(s).&quot;</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">gpu</span> <span class="ow">in</span> <span class="n">gpus</span><span class="p">:</span>
-            <span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">set_memory_growth</span><span class="p">(</span><span class="n">gpu</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>  <span class="c1"># Evita problemas de memoria</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;⚠️ TensorFlow no detectó GPUs. Se usará CPU.&quot;</span><span class="p">)</span>
-<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;⚠️ TensorFlow no está instalado. Instálalo con: pip install tensorflow-gpu&quot;</span><span class="p">)</span>
-
-<span class="c1"># 🚀 3️⃣ Configurar uso de múltiples núcleos de CPU</span>
-<span class="n">cpu_cores</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()</span>
-<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;OMP_NUM_THREADS&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">cpu_cores</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ Usando </span><span class="si">{</span><span class="n">cpu_cores</span><span class="si">}</span><span class="s2"> núcleos de CPU.&quot;</span><span class="p">)</span>
-
-<span class="c1"># 🛠️ 4️⃣ Aumentar límite de memoria en Jupyter Notebook</span>
-<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;XLA_PYTHON_CLIENT_PREALLOCATE&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;false&quot;</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Configuración de memoria ajustada para máximo rendimiento.&quot;</span><span class="p">)</span>
-
-<span class="c1"># 🔍 5️⃣ Ver información del sistema</span>
-<span class="k">try</span><span class="p">:</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;nvidia-smi&quot;</span><span class="p">)</span>  <span class="c1"># Mostrar estado de la GPU en terminal</span>
-<span class="k">except</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;⚠️ No se pudo ejecutar nvidia-smi. Verifica si tienes GPU NVIDIA.&quot;</span><span class="p">)</span>
-
-<span class="c1"># 🏎️ 6️⃣ Configuración de NumPy para máxima velocidad</span>
-<span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Evitar notación científica innecesaria</span>
-<span class="n">np</span><span class="o">.</span><span class="n">show_config</span><span class="p">()</span>
-
-<span class="c1"># 🔄 7️⃣ Función para liberar memoria (Útil después de procesos pesados)</span>
-<span class="k">def</span> <span class="nf">liberar_memoria</span><span class="p">():</span>
-    <span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">empty_cache</span><span class="p">()</span>
-    <span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
-        <span class="k">pass</span>  <span class="c1"># No hay torch instalado</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">clear_session</span><span class="p">()</span>
-    <span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
-        <span class="k">pass</span>  <span class="c1"># No hay TensorFlow instalado</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🧹 Memoria liberada.&quot;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🚀 Configuración de alto rendimiento aplicada. ¡Listo para trabajar!&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>⚠️ No se detectó GPU. Se usará CPU.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>⚠️ TensorFlow no detectó GPUs. Se usará CPU.
-✅ Usando 12 núcleos de CPU.
-✅ Configuración de memoria ajustada para máximo rendimiento.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Build Dependencies:
-  blas:
-    detection method: pkgconfig
-    found: true
-    include directory: C:/Users/ASUS/anaconda3/Library/include
-    lib directory: C:/Users/ASUS/anaconda3/Library/lib
-    name: mkl-sdl
-    openblas configuration: unknown
-    pc file directory: C:\b\abs_c1ywpu18ar\croot\numpy_and_numpy_base_1708638681471\_h_env\Library\lib\pkgconfig
-    version: &#39;2023.1&#39;
-  lapack:
-    detection method: internal
-    found: true
-    include directory: unknown
-    lib directory: unknown
-    name: dep1583119523984
-    openblas configuration: unknown
-    pc file directory: unknown
-    version: 1.26.4
-Compilers:
-  c:
-    commands: cl.exe
-    linker: link
-    name: msvc
-    version: 19.29.30154
-  c++:
-    commands: cl.exe
-    linker: link
-    name: msvc
-    version: 19.29.30154
-  cython:
-    commands: cython
-    linker: cython
-    name: cython
-    version: 3.0.8
-Machine Information:
-  build:
-    cpu: x86_64
-    endian: little
-    family: x86_64
-    system: windows
-  host:
-    cpu: x86_64
-    endian: little
-    family: x86_64
-    system: windows
-Python Information:
-  path: C:\b\abs_c1ywpu18ar\croot\numpy_and_numpy_base_1708638681471\_h_env\python.exe
-  version: &#39;3.12&#39;
-SIMD Extensions:
-  baseline:
-  - SSE
-  - SSE2
-  - SSE3
-  found:
-  - SSSE3
-  - SSE41
-  - POPCNT
-  - SSE42
-  - AVX
-  - F16C
-  - FMA3
-  - AVX2
-  not found:
-  - AVX512F
-  - AVX512CD
-  - AVX512_SKX
-  - AVX512_CLX
-  - AVX512_CNL
-  - AVX512_ICL
-
-🚀 Configuración de alto rendimiento aplicada. ¡Listo para trabajar!
-</pre></div>
-</div>
-</div>
-</div>
-</section>
 </section>
 <section id="carga-de-datos">
 <h2>Carga de datos<a class="headerlink" href="#carga-de-datos" title="Link to this heading">#</a></h2>
@@ -657,7 +497,7 @@ SIMD Extensions:
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">11</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">11</span>
 <span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">archivos</span> <span class="o">=</span> <span class="p">{</span>
 <span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="s2">&quot;train_final&quot;</span><span class="p">:</span><span class="s2">&quot;train_final.csv&quot;</span><span class="p">,</span>
 <span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="s2">&quot;test_final&quot;</span><span class="p">:</span> <span class="s2">&quot;test_final.csv&quot;</span>
@@ -2448,10 +2288,7 @@ DAYS_LAST_PHONE_CHANGE               1.264442e-37                         0.0  -
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">Introducción</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivos-del-eda">Objetivos del EDA</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anadimos-un-script-para-potenciar-el-funcionamiento-del-jupyter-notebook">Añadimos un script para potenciar el funcionamiento del jupyter notebook</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivos-del-eda">Objetivos del EDA</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carga-de-datos">Carga de datos</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diccionario-de-datos">Diccionario de datos</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-descriptivo-de-los-datos">Análisis Descriptivo de los datos</a></li>
