@@ -1,0 +1,1280 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>EDA BITCOIN &#8212; Machine Learning - Home Credit Problem</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'bitcoin';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Análisis Exploratorio de Datos (EDA) - Home Credit Default Risk" href="EDA%20Home%20Credit%20V2.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Machine Learning - Home Credit Problem - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Machine Learning - Home Credit Problem - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Bienvenido a nuestro proyecto final 🚀
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="EDA%20Home%20Credit%20V2.html">Análisis Exploratorio de Datos (EDA) - Home Credit Default Risk</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">EDA BITCOIN</a></li>
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/nicoplayz58/home-credit" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/nicoplayz58/home-credit/issues/new?title=Issue%20on%20page%20%2Fbitcoin.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/bitcoin.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>EDA BITCOIN</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">EDA BITCOIN</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-es-bitcoin">¿Qué es BITCOIN?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descripcion-de-los-datos">Descripción de los datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivo-del-analisis">Objetivo del análisis</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-exploratorio-de-datos-bitcoin">Análisis exploratorio de datos - BITCOIN</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-preliminar">Análisis preliminar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion-de-la-serie">Visualización de la serie</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion-temporal">Visualización temporal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-la-volatilidad-intradia">Análisis de la volatilidad intradía</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-del-precio-de-cierre-y-volumen-de-bitcoin">Interpretación del Precio de Cierre y Volumen de Bitcoin</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-estacionalidad-y-periodicidad-frecuencia-1-dia">Análisis de Estacionalidad y Periodicidad (Frecuencia: 1 día)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deteccion-de-anomalias">Detección de Anomalías</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-autocorrelacion">Análisis de autocorrelación</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-tendencia">Análisis de tendencia</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-estacionaridad">Análisis de Estacionaridad</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformacion-de-datos">Transformación de datos</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusiones-finales">Conclusiones finales</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="eda-bitcoin">
+<h1>EDA BITCOIN<a class="headerlink" href="#eda-bitcoin" title="Link to this heading">#</a></h1>
+<section id="que-es-bitcoin">
+<h2>¿Qué es BITCOIN?<a class="headerlink" href="#que-es-bitcoin" title="Link to this heading">#</a></h2>
+<p>Bitcoin (BTC) es una criptomoneda, es decir, una moneda digital descentralizada que funciona sin la necesidad de un banco central. Se basa en tecnología blockchain, un libro contable público y distribuido donde se registran todas las transacciones. Su precio es altamente volátil debido a la oferta y demanda, noticias económicas, regulaciones y otros factores externos.</p>
+</section>
+<section id="descripcion-de-los-datos">
+<h2>Descripción de los datos<a class="headerlink" href="#descripcion-de-los-datos" title="Link to this heading">#</a></h2>
+<p>El dataset contiene datos financieros históricos del mercado de Bitcoin con frecuencias de: 1 hora, 4 horas, 1dia y 15 minutos; cubriendo el periodo desde el 1 de enero de 2018 hasta 6 de febrero de 2025. Los datos permiten analizar el comportamiento de precios y volúmenes de Bitcoin, incluyendo tendencias, volatilidad y actividad del mercado. Contiene las siguientes variables:</p>
+<ul class="simple">
+<li><p>Precio de apertura (Open): El precio al que Bitcoin comenzó a cotizar en un periodo determinado (15 min, 1h,  4h o 1d).</p></li>
+<li><p>Precio de cierre (Close): El último precio registrado en ese mismo periodo.</p></li>
+<li><p>Máximo y mínimo (High &amp; Low): Los valores más alto y más bajo de Bitcoin en ese periodo.</p></li>
+<li><p>Volumen (Volume): La cantidad total de Bitcoin negociado.</p></li>
+<li><p>Quote asset volume: Volumen total de transacciones expresado en el activo cotizado (USD).</p></li>
+<li><p>Number of trades: Número total de transacciones realizadas en el periodo.</p></li>
+<li><p>Taker buy base asset volume: Volumen de compra por los compradores (takers) expresado en el activo base (Bitcoin).</p></li>
+<li><p>Taker buy quote asset volume: Volumen de compra por los compradores (takers) expresado en el activo cotizado (USD).</p></li>
+<li><p>Retorno (Return): La variación porcentual del precio entre periodos consecutivos.</p></li>
+<li><p>Volatilidad: Una medida de qué tan variable es el precio en un periodo de tiempo.</p></li>
+</ul>
+</section>
+<section id="objetivo-del-analisis">
+<h2>Objetivo del análisis<a class="headerlink" href="#objetivo-del-analisis" title="Link to this heading">#</a></h2>
+<p>El objetivo de este EDA es comprender la estructura de los datos de Bitcoin, identificar patrones temporales (tendencia, estacionalidad, ciclos), detectar anomalías y preparar los datos para la aplicación de modelos predictivos o de pronóstico.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="analisis-exploratorio-de-datos-bitcoin">
+<h1>Análisis exploratorio de datos - BITCOIN<a class="headerlink" href="#analisis-exploratorio-de-datos-bitcoin" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tsa.stattools</span> <span class="kn">import</span> <span class="n">adfuller</span><span class="p">,</span> <span class="n">acf</span><span class="p">,</span> <span class="n">pacf</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tsa.seasonal</span> <span class="kn">import</span> <span class="n">seasonal_decompose</span>  <span class="c1"># Importación corregida</span>
+<span class="kn">from</span> <span class="nn">statsmodels.graphics.tsaplots</span> <span class="kn">import</span> <span class="n">plot_acf</span><span class="p">,</span> <span class="n">plot_pacf</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cargat datos</span>
+
+<span class="n">data_folder</span> <span class="o">=</span> <span class="s2">&quot;BTCBinance&quot;</span>
+
+<span class="c1"># Archivos específicos a leer</span>
+<span class="n">files</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;1d&quot;</span><span class="p">:</span> <span class="s2">&quot;btc_1d_data_2018_to_2025.csv&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;4h&quot;</span><span class="p">:</span> <span class="s2">&quot;btc_4h_data_2018_to_2025.csv&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;1h&quot;</span><span class="p">:</span> <span class="s2">&quot;btc_1h_data_2018_to_2025.csv&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;15m&quot;</span><span class="p">:</span> <span class="s2">&quot;btc_15m_data_2018_to_2025.csv&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="c1"># Leer los datasets y procesarlos</span>
+<span class="n">dfs</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">files</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_folder</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>  <span class="c1"># Ruta completa</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Open time&quot;</span><span class="p">],</span> <span class="n">index_col</span><span class="o">=</span><span class="s2">&quot;Open time&quot;</span><span class="p">)</span>  <span class="c1"># Leer con fecha como índice</span>
+    <span class="n">dfs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;Open&quot;</span><span class="p">,</span> <span class="s2">&quot;High&quot;</span><span class="p">,</span> <span class="s2">&quot;Low&quot;</span><span class="p">,</span> <span class="s2">&quot;Close&quot;</span><span class="p">,</span> <span class="s2">&quot;Volume&quot;</span><span class="p">]]</span>  <span class="c1"># Mantener columnas relevantes</span>
+    
+    <span class="c1"># Eliminar columna &quot;Ignore&quot; y seleccionar columnas relevantes</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Ignore&quot;</span><span class="p">])</span>  <span class="c1"># Eliminar columna</span>
+    <span class="n">dfs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;Open&quot;</span><span class="p">,</span> <span class="s2">&quot;High&quot;</span><span class="p">,</span> <span class="s2">&quot;Low&quot;</span><span class="p">,</span> <span class="s2">&quot;Close&quot;</span><span class="p">,</span> <span class="s2">&quot;Volume&quot;</span><span class="p">]]</span>  <span class="c1"># Mantener columnas clave</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">17</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">files</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_folder</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>  <span class="c1"># Ruta completa</span>
+<span class="ne">---&gt; </span><span class="mi">17</span>     <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Open time&quot;</span><span class="p">],</span> <span class="n">index_col</span><span class="o">=</span><span class="s2">&quot;Open time&quot;</span><span class="p">)</span>  <span class="c1"># Leer con fecha como índice</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span>     <span class="n">dfs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;Open&quot;</span><span class="p">,</span> <span class="s2">&quot;High&quot;</span><span class="p">,</span> <span class="s2">&quot;Low&quot;</span><span class="p">,</span> <span class="s2">&quot;Close&quot;</span><span class="p">,</span> <span class="s2">&quot;Volume&quot;</span><span class="p">]]</span>  <span class="c1"># Mantener columnas relevantes</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span>     <span class="c1"># Eliminar columna &quot;Ignore&quot; y seleccionar columnas relevantes</span>
+
+<span class="nn">File ~\anaconda3\Lib\site-packages\pandas\io\parsers\readers.py:1026,</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options, dtype_backend)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1013</span> <span class="n">kwds_defaults</span> <span class="o">=</span> <span class="n">_refine_defaults_read</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1014</span>     <span class="n">dialect</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1015</span>     <span class="n">delimiter</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1022</span>     <span class="n">dtype_backend</span><span class="o">=</span><span class="n">dtype_backend</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1023</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1024</span> <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1026</span> <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+
+<span class="nn">File ~\anaconda3\Lib\site-packages\pandas\io\parsers\readers.py:620,</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">617</span> <span class="n">_validate_names</span><span class="p">(</span><span class="n">kwds</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;names&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">619</span> <span class="c1"># Create the parser.</span>
+<span class="ne">--&gt; </span><span class="mi">620</span> <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">622</span> <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">623</span>     <span class="k">return</span> <span class="n">parser</span>
+
+<span class="nn">File ~\anaconda3\Lib\site-packages\pandas\io\parsers\readers.py:1620,</span> in <span class="ni">TextFileReader.__init__</span><span class="nt">(self, f, engine, **kwds)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1617</span>     <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1619</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">:</span> <span class="n">IOHandles</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="ne">-&gt; </span><span class="mi">1620</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+
+<span class="nn">File ~\anaconda3\Lib\site-packages\pandas\io\parsers\readers.py:1880,</span> in <span class="ni">TextFileReader._make_engine</span><span class="nt">(self, f, engine)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1878</span>     <span class="k">if</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mode</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1879</span>         <span class="n">mode</span> <span class="o">+=</span> <span class="s2">&quot;b&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1880</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="o">=</span> <span class="n">get_handle</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1881</span>     <span class="n">f</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1882</span>     <span class="n">mode</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1883</span>     <span class="n">encoding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1884</span>     <span class="n">compression</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;compression&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1885</span>     <span class="n">memory_map</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;memory_map&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1886</span>     <span class="n">is_text</span><span class="o">=</span><span class="n">is_text</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1887</span>     <span class="n">errors</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding_errors&quot;</span><span class="p">,</span> <span class="s2">&quot;strict&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1888</span>     <span class="n">storage_options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;storage_options&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1889</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1890</span> <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+<span class="g g-Whitespace">   </span><span class="mi">1891</span> <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="o">.</span><span class="n">handle</span>
+
+<span class="nn">File ~\anaconda3\Lib\site-packages\pandas\io\common.py:873,</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">868</span> <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">869</span>     <span class="c1"># Check whether the filename is to be opened in binary mode.</span>
+<span class="g g-Whitespace">    </span><span class="mi">870</span>     <span class="c1"># Binary mode does not support &#39;encoding&#39; and &#39;newline&#39;.</span>
+<span class="g g-Whitespace">    </span><span class="mi">871</span>     <span class="k">if</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span> <span class="ow">and</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">872</span>         <span class="c1"># Encoding</span>
+<span class="ne">--&gt; </span><span class="mi">873</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">874</span>             <span class="n">handle</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">875</span>             <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">876</span>             <span class="n">encoding</span><span class="o">=</span><span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">877</span>             <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">878</span>             <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">879</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">880</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">881</span>         <span class="c1"># Binary mode</span>
+<span class="g g-Whitespace">    </span><span class="mi">882</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;BTCBinance\\btc_1d_data_2018_to_2025.csv&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<section id="analisis-preliminar">
+<h2>Análisis preliminar<a class="headerlink" href="#analisis-preliminar" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Inspección general.</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">df</span> <span class="ow">in</span> <span class="n">dfs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Frecuencia: </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Dimensiones: </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Primeras filas:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Últimas filas:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">tail</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Valores faltantes por columna:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">30</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Frecuencia: 1d
+Dimensiones: (2594, 5)
+Primeras filas:
+                Open      High       Low     Close        Volume
+Open time                                                       
+2018-01-01  13715.65  13818.55  12750.00  13380.00   8609.915844
+2018-01-02  13382.16  15473.49  12890.02  14675.11  20078.092111
+2018-01-03  14690.00  15307.56  14150.00  14919.51  15905.667639
+2018-01-04  14919.51  15280.00  13918.04  15059.54  21329.649574
+2018-01-05  15059.56  17176.24  14600.00  16960.39  23251.491125
+Últimas filas:
+                 Open       High        Low      Close       Volume
+Open time                                                          
+2025-02-02  100635.66  101456.60   99747.59   99796.00   3149.62233
+2025-02-03   97700.59   97782.79   91231.00   94495.21  20992.95572
+2025-02-04  101328.51  101660.94  100743.33  101367.77   1910.35542
+2025-02-05   97763.14   98930.44   97131.43   97589.30   8160.56795
+2025-02-06   96612.44   99120.00   96430.78   98329.13   8315.06445
+Valores faltantes por columna:
+Open      0
+High      0
+Low       0
+Close     0
+Volume    0
+dtype: int64
+------------------------------
+Frecuencia: 4h
+Dimensiones: (15543, 5)
+Primeras filas:
+                         Open      High       Low     Close       Volume
+Open time                                                               
+2018-01-01 00:00:00  13715.65  13715.65  13155.38  13410.03  1676.204807
+2018-01-01 04:00:00  13434.98  13818.55  13322.15  13570.35  1302.214836
+2018-01-01 08:00:00  13569.98  13735.24  13001.13  13220.56  1319.755931
+2018-01-01 12:00:00  13220.56  13330.00  12750.00  13247.00  1831.933153
+2018-01-01 16:00:00  13247.00  13290.65  12940.00  13240.37  1092.337234
+Últimas filas:
+                         Open      High       Low     Close      Volume
+Open time                                                              
+2025-02-05 08:00:00  97864.43  98256.00  97257.05  98198.00  3128.59694
+2025-02-05 12:00:00  98198.00  99149.00  97734.69  98116.24  5192.00486
+2025-02-05 16:00:00  98116.24  98277.02  96500.00  97370.00  4822.00148
+2025-02-05 20:00:00  97370.00  97706.37  96155.00  96612.43  5817.81518
+2025-02-06 00:00:00  96612.44  97493.07  96430.78  97355.67  2552.15194
+Valores faltantes por columna:
+Open      0
+High      0
+Low       0
+Close     0
+Volume    0
+dtype: int64
+------------------------------
+Frecuencia: 1h
+Dimensiones: (62111, 5)
+Primeras filas:
+                         Open      High       Low     Close      Volume
+Open time                                                              
+2018-01-01 00:00:00  13715.65  13715.65  13400.01  13529.01  443.356199
+2018-01-01 01:00:00  13528.99  13595.89  13155.38  13203.06  383.697006
+2018-01-01 02:00:00  13203.00  13418.43  13200.00  13330.18  429.064572
+2018-01-01 03:00:00  13330.26  13611.27  13290.00  13410.03  420.087030
+2018-01-01 04:00:00  13434.98  13623.29  13322.15  13601.01  340.807329
+Últimas filas:
+                         Open      High       Low     Close      Volume
+Open time                                                              
+2025-02-05 20:00:00  97370.00  97706.37  96870.39  97323.39  1258.92036
+2025-02-05 21:00:00  97323.40  97532.61  96769.23  96904.11  1234.05224
+2025-02-05 22:00:00  96904.11  97047.89  96241.12  96445.63  2445.99875
+2025-02-05 23:00:00  96445.64  96853.57  96155.00  96612.43   878.84383
+2025-02-06 00:00:00  96612.44  96999.26  96430.78  96826.96   983.47440
+Valores faltantes por columna:
+Open      0
+High      0
+Low       0
+Close     0
+Volume    0
+dtype: int64
+------------------------------
+Frecuencia: 15m
+Dimensiones: (248397, 5)
+Primeras filas:
+                         Open      High       Low     Close      Volume
+Open time                                                              
+2018-01-01 00:00:00  13715.65  13715.65  13400.01  13556.15  123.616013
+2018-01-01 00:15:00  13533.75  13550.87  13402.00  13521.12   98.136430
+2018-01-01 00:30:00  13500.00  13545.37  13450.00  13470.41   79.904037
+2018-01-01 00:45:00  13494.65  13690.87  13450.00  13529.01  141.699719
+2018-01-01 01:00:00  13528.99  13571.74  13402.28  13445.63   72.537533
+Últimas filas:
+                         Open      High       Low     Close     Volume
+Open time                                                             
+2025-02-05 23:00:00  96445.64  96824.80  96240.88  96714.02  357.74121
+2025-02-05 23:15:00  96714.03  96853.57  96285.32  96327.51  163.73220
+2025-02-05 23:30:00  96327.52  96641.06  96155.00  96584.95  211.05421
+2025-02-05 23:45:00  96584.94  96665.81  96441.93  96612.43  146.31621
+2025-02-06 00:00:00  96612.44  96815.63  96430.78  96732.14  279.01617
+Valores faltantes por columna:
+Open      0
+High      0
+Low       0
+Close     0
+Volume    0
+dtype: int64
+------------------------------
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Estadísticas descriptivas</span>
+<span class="k">for</span> <span class="n">freq</span><span class="p">,</span> <span class="n">df</span> <span class="ow">in</span> <span class="n">dfs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">=== Estadísticas descriptivas (</span><span class="si">{</span><span class="n">freq</span><span class="si">}</span><span class="s1">) ===&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Estadísticas descriptivas (1d) ===
+                Open           High            Low          Close  \
+count    2594.000000    2594.000000    2594.000000    2594.000000   
+mean    29057.847182   29743.249383   28327.995451   29090.193446   
+std     23539.635421   24046.515394   23021.304519   23576.229505   
+min      3211.710000    3276.500000    3156.260000    3211.720000   
+25%      9067.985000    9261.240000    8765.000000    9068.840000   
+50%     22712.950000   23252.895000   22257.575000   22741.115000   
+75%     43484.365000   44293.657500   42487.500000   43527.390000   
+max    106143.820000  108353.000000  105321.490000  106143.820000   
+
+              Volume  
+count    2594.000000  
+mean    70821.588903  
+std     80473.318599  
+min      1521.537318  
+25%     29769.803371  
+50%     44833.178030  
+75%     73702.302851  
+max    760705.362783  
+
+=== Estadísticas descriptivas (4h) ===
+                Open           High            Low          Close  \
+count   15543.000000   15543.000000   15543.000000   15543.000000   
+mean    29063.280668   29334.077876   28775.596838   29068.702379   
+std     23531.883881   23732.467929   23322.094973   23537.982874   
+min      3172.620000    3210.000000    3156.260000    3172.050000   
+25%      9082.110000    9149.745000    8967.610000    9082.280000   
+50%     22772.200000   22988.600000   22543.640000   22773.620000   
+75%     43511.985000   43860.585000   43066.775000   43518.095000   
+max    108239.190000  109588.000000  107093.330000  108239.190000   
+
+              Volume  
+count   15543.000000  
+mean    11832.866537  
+std     15081.813282  
+min         5.887034  
+25%      4276.162780  
+50%      7066.940340  
+75%     12596.614784  
+max    284711.694213  
+
+=== Estadísticas descriptivas (1h) ===
+                Open           High            Low          Close  \
+count   62111.000000   62111.000000   62111.000000   62111.000000   
+mean    29072.894562   29205.147342   28933.700827   29074.221833   
+std     23533.108494   23630.688047   23432.206585   23534.568925   
+min      3172.620000    3184.750000    3156.260000    3172.050000   
+25%      9084.980000    9122.230000    9041.000000    9085.015000   
+50%     22784.860000   22895.400000   22670.220000   22785.320000   
+75%     43500.860000   43694.435000   43297.850000   43502.445000   
+max    108320.000000  109588.000000  107780.510000  108320.010000   
+
+              Volume  
+count   62111.000000  
+mean     2961.369397  
+std      4146.849702  
+min         0.000000  
+25%       966.645698  
+50%      1642.736260  
+75%      3134.395999  
+max    137207.188600  
+
+=== Estadísticas descriptivas (15m) ===
+                Open           High            Low          Close  \
+count  248397.000000  248397.000000  248397.000000  248397.000000   
+mean    29074.231803   29138.729916   29007.225176   29074.566799   
+std     23534.018801   23580.874018   23485.307403   23534.403528   
+min      3166.110000    3174.780000    3156.260000    3167.070000   
+25%      9086.540000    9103.730000    9066.380000    9086.620000   
+50%     22794.360000   22848.560000   22737.490000   22794.370000   
+75%     43500.540000   43600.000000   43397.050000   43501.020000   
+max    108975.430000  109588.000000  108185.270000  108975.420000   
+
+              Volume  
+count  248397.000000  
+mean      740.480636  
+std      1131.293284  
+min         0.000000  
+25%       219.859070  
+50%       388.084750  
+75%       768.552930  
+max     40371.405060  
+</pre></div>
+</div>
+</div>
+</div>
+<p>El análisis de los datos de Bitcoin entre enero de 2018 y febrero de 2025 revela una volatilidad extrema y un crecimiento notable, con precios oscilando entre <span class="math notranslate nohighlight">\(3,156.26 y \)</span>108,353.00. Durante este período, el precio medio de cierre se situó en <span class="math notranslate nohighlight">\(29,090.19, con una elevada desviación estándar de \)</span>23,576.22, confirmando la importante variabilidad del mercado.</p>
+<p>El volumen diario promedio alcanzó las 70,821 unidades, con máximos de 760,705 unidades en momentos de intensa actividad comercial. Los rendimientos diarios muestran un promedio de 0.14%, con caídas extremas de hasta -39.50% y alzas de hasta 19.53% en un solo día, mientras que la mediana positiva del 0.07% sugiere una tendencia general alcista a pesar de la volatilidad.</p>
+<p>La comparación entre distintas frecuencias temporales (diaria, 4 horas y 1 hora) muestra consistencia en los valores medios y revela significativas fluctuaciones intradiarias, observándose además una distribución desigual del volumen a lo largo del día.</p>
+</section>
+<section id="visualizacion-de-la-serie">
+<h2>Visualización de la serie<a class="headerlink" href="#visualizacion-de-la-serie" title="Link to this heading">#</a></h2>
+<section id="visualizacion-temporal">
+<h3>Visualización temporal<a class="headerlink" href="#visualizacion-temporal" title="Link to this heading">#</a></h3>
+<p>Con el objetivo de observar la tendencia general y posibles anomalías.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Gráfica de línea para el precio de cierre (solo fr de 1 día)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dfs</span><span class="p">[</span><span class="s2">&quot;15m&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">dfs</span><span class="p">[</span><span class="s2">&quot;15m&quot;</span><span class="p">][</span><span class="s2">&quot;Close&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Precio de Cierre (frecuencia: 15 min)&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Precio de Cierre de Bitcoin (15 min)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Fecha&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Precio de Cierre (USD)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/8a514f09a594977ee71a8f1dae84db03f88ee64fad06fdc89cf55c4d0e30c300.png" src="_images/8a514f09a594977ee71a8f1dae84db03f88ee64fad06fdc89cf55c4d0e30c300.png" />
+</div>
+</div>
+<p>La gráfica del precio de cierre de Bitcoin en intervalos de 15 minutos, desde 2018 hasta principios de 2025, revela una serie de ciclos de mercado completos, cada uno influenciado por eventos específicos y factores externos. Durante este período, Bitcoin experimentó fases de consolidación, ciclos alcistas significativos y correcciones prolongadas, reflejando su naturaleza volátil y dinámica.</p>
+<p>En 2018-2020, el precio se mantuvo en un rango relativamente bajo, con un mínimo cercano a los $3,000 a finales de 2018, marcando un período de consolidación después del máximo histórico de 2017. Este mercado bajista fue impulsado por la corrección posterior a la “cripto-manía” y la falta de adopción institucional en ese momento.</p>
+<p>En 2021, se observó el primer ciclo alcista importante, con un rápido aumento desde 20,000 hasta superar los 60,000, impulsado por la adopción institucional (como las inversiones de Tesla y MicroStrategy), la expansión monetaria global debido a la pandemia de COVID-19, y el creciente interés minorista. Sin embargo, este ciclo fue seguido por una corrección significativa y un segundo intento de alcanzar máximos similares a finales de 2021.</p>
+<p>El 2022 estuvo marcado por un mercado bajista prolongado, con el precio descendiendo gradualmente hasta estabilizarse alrededor de los $20,000 en 2023. Este período estuvo influenciado por factores macroeconómicos adversos, como el aumento de las tasas de interés y la inflación, así como por problemas en el ecosistema cripto, como el colapso de FTX.</p>
+<p>A partir de finales de 2023 y durante 2024, se inició un nuevo ciclo alcista que superó significativamente los máximos anteriores, alcanzando más de $100,000 a principios de 2025. Este ciclo podría estar relacionado con el evento de reducción de emisión (halving) programado para 2024, la mayor adopción de Bitcoin como reserva de valor, y la mejora de la infraestructura del ecosistema cripto.</p>
+<p>En resumen, esta gráfica no solo muestra la evolución del precio de Bitcoin, sino que también refleja la influencia de factores externos y la maduración del ecosistema cripto a lo largo del tiempo.</p>
+</section>
+<section id="analisis-de-la-volatilidad-intradia">
+<h3>Análisis de la volatilidad intradía<a class="headerlink" href="#analisis-de-la-volatilidad-intradia" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calcular los retornos porcentuales y la volatilidad (desviación estándar de los retornos)</span>
+<span class="k">for</span> <span class="n">freq</span><span class="p">,</span> <span class="n">df</span> <span class="ow">in</span> <span class="n">dfs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Return&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span>  <span class="c1"># Retornos porcentuales</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Volatility&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Return&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>  <span class="c1"># Volatilidad (20 períodos)</span>
+
+<span class="c1"># Visualizar la volatilidad para la frecuencia de 15 minutos</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dfs</span><span class="p">[</span><span class="s2">&quot;15m&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">dfs</span><span class="p">[</span><span class="s2">&quot;15m&quot;</span><span class="p">][</span><span class="s1">&#39;Volatility&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Volatilidad (15 min)&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Volatilidad del Precio de Bitcoin (15 minutos)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Fecha&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Volatilidad&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/8b67e2a118a37cc35e5ca71b09a87dbc57faa4b64c1eecb0ff33963f7bda94a2.png" src="_images/8b67e2a118a37cc35e5ca71b09a87dbc57faa4b64c1eecb0ff33963f7bda94a2.png" />
+</div>
+</div>
+<p>La gráfica de volatilidad muestra cómo la variabilidad del precio de Bitcoin ha cambiado a lo largo del tiempo en intervalos de 15 minutos. Se observan picos de volatilidad que coinciden con eventos importantes en el mercado. Por ejemplo, en 2020, el halving de Bitcoin (mayo 2020) y la incertidumbre generada por la pandemia de COVID-19 provocaron un aumento significativo en la volatilidad. Durante 2021, la volatilidad también aumentó debido al rápido crecimiento del precio, impulsado por la adopción institucional y el interés minorista.</p>
+<p>En 2022, la caída del precio y eventos como el colapso de FTX (noviembre 2022) generaron nuevos picos de volatilidad, reflejando la desconfianza en el ecosistema cripto. Por otro lado, los períodos de baja volatilidad, como en 2019 o 2023, suelen indicar momentos de consolidación o estabilidad en el mercado. Este análisis de volatilidad es crucial para entender los movimientos bruscos del precio y cómo reacciona el mercado ante eventos específicos.</p>
+</section>
+<section id="interpretacion-del-precio-de-cierre-y-volumen-de-bitcoin">
+<h3>Interpretación del Precio de Cierre y Volumen de Bitcoin<a class="headerlink" href="#interpretacion-del-precio-de-cierre-y-volumen-de-bitcoin" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Crear una gráfica con dos ejes (precio y volumen)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Eje izquierdo: Precio de cierre</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dfs</span><span class="p">[</span><span class="s2">&quot;15m&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">dfs</span><span class="p">[</span><span class="s2">&quot;15m&quot;</span><span class="p">][</span><span class="s1">&#39;Close&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Precio de Cierre (15 min)&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Fecha&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Precio de Cierre (USD)&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">labelcolor</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
+
+<span class="c1"># Eje derecho: Volumen</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dfs</span><span class="p">[</span><span class="s2">&quot;15m&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">dfs</span><span class="p">[</span><span class="s2">&quot;15m&quot;</span><span class="p">][</span><span class="s1">&#39;Volume&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Volumen (15 min)&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Volumen&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">labelcolor</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Precio de Cierre y Volumen de Bitcoin (15 minutos)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3bb3e60dff7333868cf5942b323640a67528f439598ced4aee195ff9eaa428cd.png" src="_images/3bb3e60dff7333868cf5942b323640a67528f439598ced4aee195ff9eaa428cd.png" />
+</div>
+</div>
+<p>La gráfica que combina el precio de cierre y el volumen de transacciones permite analizar la relación entre ambos. Los picos de precio acompañados de un aumento en el volumen sugieren que el movimiento está respaldado por una mayor actividad comercial. Por ejemplo, en 2021, los máximos históricos de Bitcoin (alrededor de 64,000 en abril  y 69,000 en noviembre) coincidieron con aumentos significativos en el volumen, lo que indica una fuerte participación del mercado. Por el contrario, en 2022, la caída del precio también estuvo acompañada de un volumen elevado, especialmente durante el colapso de FTX, lo que refleja una intensa actividad de venta. En algunos casos, se observan movimientos de precio con bajo volumen, lo que podría indicar una falta de solidez en el movimiento o posibles manipulaciones del mercado. Esta relación entre precio y volumen es crucial para entender la dinámica del mercado y confirmar la validez de los movimientos de precio.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Definir eventos clave</span>
+<span class="n">eventos</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Halving 2020&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-05-11&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Máximo histórico 2021&quot;</span><span class="p">:</span> <span class="s2">&quot;2021-04-14&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Colapso de FTX&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-11-11&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Halving 2024&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-20&quot;</span>  <span class="c1"># Fecha estimada</span>
+<span class="p">}</span>
+
+<span class="c1"># Graficar precio de cierre con eventos marcados</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dfs</span><span class="p">[</span><span class="s2">&quot;15m&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">dfs</span><span class="p">[</span><span class="s2">&quot;15m&quot;</span><span class="p">][</span><span class="s1">&#39;Close&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Precio de Cierre (15 min)&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">evento</span><span class="p">,</span> <span class="n">fecha</span> <span class="ow">in</span> <span class="n">eventos</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">fecha</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">evento</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Precio de Cierre de Bitcoin con Eventos Clave (15 minutos)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Fecha&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Precio de Cierre (USD)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/1fff36bc11fe96918f647f26f2af8b2dd6de57778684f5ae561831736bb0353f.png" src="_images/1fff36bc11fe96918f647f26f2af8b2dd6de57778684f5ae561831736bb0353f.png" />
+</div>
+</div>
+<p>La gráfica que incluye eventos clave muestra cómo estos han influido en el comportamiento del precio de Bitcoin. El halving de 2020 marcó el inicio de un ciclo alcista, mientras que el colapso de FTX en 2022 generó una caída brusca en el precio. El próximo halving de 2024 podría marcar el inicio de un nuevo ciclo alcista. Estos eventos clave son fundamentales para entender los movimientos del precio y la dinámica del mercado de Bitcoin.</p>
+</section>
+<section id="analisis-de-estacionalidad-y-periodicidad-frecuencia-1-dia">
+<h3>Análisis de Estacionalidad y Periodicidad (Frecuencia: 1 día)<a class="headerlink" href="#analisis-de-estacionalidad-y-periodicidad-frecuencia-1-dia" title="Link to this heading">#</a></h3>
+<p>Descomposición de la serie en tendencia, estacionalidad y residuales.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.tsa.seasonal</span> <span class="kn">import</span> <span class="n">seasonal_decompose</span>
+
+<span class="c1"># Descomposición de la serie temporal para la frecuencia diaria</span>
+<span class="n">freq</span> <span class="o">=</span> <span class="s2">&quot;1d&quot;</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">[</span><span class="n">freq</span><span class="p">]</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">seasonal_decompose</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Close&quot;</span><span class="p">],</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;multiplicative&quot;</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="mi">365</span><span class="p">)</span>  <span class="c1"># Periodo aproximado de 1 año</span>
+
+<span class="c1"># Graficar los componentes</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Close&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Serie original&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">trend</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Tendencia&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">seasonal</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Estacionalidad&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Residuo&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/e3e9aa0210e185306911f14ee7a5391ee5d944006c41157cca9e262be47b11d1.png" src="_images/e3e9aa0210e185306911f14ee7a5391ee5d944006c41157cca9e262be47b11d1.png" />
+</div>
+</div>
+<p>En el primer panel, y como ya se vio anteriormente, la serie original muestra el precio de Bitcoin con su alta volatilidad, comenzando alrededor de <span class="math notranslate nohighlight">\(10,000 en 2018, experimentando dos ciclos alcistas significativos (2021 y 2024-2025), con el precio máximo superando los \)</span>100,000 a principios de 2025.</p>
+<p>El segundo panel muestra la tendencia subyacente, que filtra las fluctuaciones a corto plazo, revelando tres fases principales: un período estable entre 2018-2020, un ciclo alcista y bajista entre 2021-2022, y una nueva fase alcista desde 2023 hasta 2025, sugiriendo ciclos aproximadamente de 4 años.</p>
+<p>El tercer panel presenta el componente estacional, que muestra patrones recurrentes dentro de cada año con fluctuaciones entre 0.85 y 1.15, indicando que Bitcoin tiende a tener períodos predecibles de mayor y menor actividad que se repiten anualmente.</p>
+<p>Finalmente, el componente residual en el cuarto panel captura las fluctuaciones irregulares no explicadas por la tendencia o estacionalidad, mostrando la naturaleza impredecible del mercado de Bitcoin, con momentos de alta volatilidad inexplicable, especialmente durante 2019-2020 y 2021-2022.</p>
+</section>
+<section id="deteccion-de-anomalias">
+<h3>Detección de Anomalías<a class="headerlink" href="#deteccion-de-anomalias" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Detección de anomalías</span>
+<span class="c1"># Usamos el método de desviación estándar para detectar outliers</span>
+<span class="n">residuals</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">resid</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>  <span class="c1"># Residuos de la descomposición</span>
+<span class="n">mean_residual</span> <span class="o">=</span> <span class="n">residuals</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">std_residual</span> <span class="o">=</span> <span class="n">residuals</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<span class="n">outliers</span> <span class="o">=</span> <span class="n">residuals</span><span class="p">[(</span><span class="n">residuals</span> <span class="o">&gt;</span> <span class="n">mean_residual</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">std_residual</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">residuals</span> <span class="o">&lt;</span> <span class="n">mean_residual</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">std_residual</span><span class="p">)]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">residuals</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">residuals</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Residuos&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">outliers</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">outliers</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Outliers&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Detección de anomalías en los residuos, frecuencia: 1 dia&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Fecha&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Residuos&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/8f9baf646d12d13bb8a231c133216b24f054314bbbc60c7474148c29f4827a10.png" src="_images/8f9baf646d12d13bb8a231c133216b24f054314bbbc60c7474148c29f4827a10.png" />
+</div>
+</div>
+<p>En esta gráfica, los residuos de la descomposición de la serie temporal se muestran en azul, y los valores atípicos (outliers) se resaltan en rojo.</p>
+<p>La detección de anomalías en los residuos de la serie temporal de Bitcoin con frecuencia diaria revela eventos extremos que han impactado significativamente el mercado. Estos outliers, que se desvían más de 2 desviaciones estándar de la media, están asociados con eventos clave que han influido en el comportamiento del precio de Bitcoin.</p>
+<p>Los outliers detectados en los residuos reflejan la naturaleza altamente volátil del mercado de Bitcoin y su sensibilidad a eventos externos como los ya mencionados anteriormente. Estos eventos no solo generan movimientos bruscos en el precio, sino que también tienen un impacto duradero en la confianza del mercado y la adopción de Bitcoin.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 4.1 Diagramas de caja por periodo (meses)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">dfs</span><span class="p">[</span><span class="s2">&quot;15m&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">dfs</span><span class="p">[</span><span class="s2">&quot;15m&quot;</span><span class="p">][</span><span class="s2">&quot;Close&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribución de precios de cierre de Bitcoin por mes&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Mes&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Precio de cierre (USD)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/409057fb9a3f47fba4bafcb9fe78327101fc7e91385e7d3371aeecb766a8ffd6.png" src="_images/409057fb9a3f47fba4bafcb9fe78327101fc7e91385e7d3371aeecb766a8ffd6.png" />
+</div>
+</div>
+<p>El análisis de la distribución de precios de cierre de Bitcoin revela patrones significativos de volatilidad y estacionalidad a lo largo del año. Los datos muestran una clara tendencia hacia mayor volatilidad y precios extremadamente altos en los meses de invierno (diciembre, enero y febrero), donde se observan valores atípicos superiores a los <span class="math notranslate nohighlight">\(100,000 USD. En contraste, el período de mediados de año (junio a septiembre) presenta rangos más estrechos, sugiriendo fases de relativa estabilidad en el mercado. Las medianas mensuales oscilan principalmente entre \)</span>20,000 y $30,000 USD, pero los rangos intercuartílicos más amplios en marzo y abril indican períodos de mayor incertidumbre y dispersión en los precios.</p>
+</section>
+<section id="analisis-de-autocorrelacion">
+<h3>Análisis de autocorrelación<a class="headerlink" href="#analisis-de-autocorrelacion" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Para variable CLOSE - Frecuencia 15min</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">211</span><span class="p">)</span>
+<span class="n">plot_acf</span><span class="p">(</span><span class="n">dfs</span><span class="p">[</span><span class="s2">&quot;15m&quot;</span><span class="p">][</span><span class="s2">&quot;Close&quot;</span><span class="p">],</span> <span class="n">lags</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">212</span><span class="p">)</span>
+<span class="n">plot_pacf</span><span class="p">(</span><span class="n">dfs</span><span class="p">[</span><span class="s2">&quot;15m&quot;</span><span class="p">][</span><span class="s2">&quot;Close&quot;</span><span class="p">],</span> <span class="n">lags</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/8fce391114923baa46106a5823d4cd26d82adfae302e8ddb7023c789ccd3d9d8.png" src="_images/8fce391114923baa46106a5823d4cd26d82adfae302e8ddb7023c789ccd3d9d8.png" />
+</div>
+</div>
+<p>El análisis de autocorrelación (ACF) del precio de cierre de Bitcoin revela una serie temporal con memoria persistente, donde los valores mantienen correlaciones significativas incluso después de 40 rezagos. Este comportamiento es característico de una serie no estacionaria con una tendencia marcada, lo que sugiere que el precio de Bitcoin está fuertemente influenciado por su comportamiento histórico. La ACF no disminuye rápidamente, lo que confirma la necesidad de aplicar técnicas de diferenciación para lograr estacionariedad antes de implementar modelos predictivos.</p>
+<p>Por otro lado, la función de autocorrelación parcial (PACF) muestra correlaciones significativas únicamente en los primeros dos rezagos, con valores que caen rápidamente dentro de las bandas de significancia estadística para rezagos mayores. Esto indica que el precio de Bitcoin tiene una dependencia de corto plazo, donde los valores actuales están influenciados principalmente por los valores más recientes.</p>
+</section>
+<section id="analisis-de-tendencia">
+<h3>Análisis de tendencia<a class="headerlink" href="#analisis-de-tendencia" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.tsa.holtwinters</span> <span class="kn">import</span> <span class="n">ExponentialSmoothing</span>
+
+<span class="c1"># Aplicar suavizamiento exponencial</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">ExponentialSmoothing</span><span class="p">(</span><span class="n">dfs</span><span class="p">[</span><span class="s2">&quot;15m&quot;</span><span class="p">][</span><span class="s2">&quot;Close&quot;</span><span class="p">],</span> <span class="n">trend</span><span class="o">=</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="n">seasonal</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">damped</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">fit</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">smoothing_level</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>  <span class="c1"># Ajustar el nivel de suavizado</span>
+
+<span class="c1"># Graficar el precio original y el suavizado</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dfs</span><span class="p">[</span><span class="s2">&quot;15m&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">dfs</span><span class="p">[</span><span class="s2">&quot;15m&quot;</span><span class="p">][</span><span class="s2">&quot;Close&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Precio de Cierre (15 min)&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dfs</span><span class="p">[</span><span class="s2">&quot;15m&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">fit</span><span class="o">.</span><span class="n">fittedvalues</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Tendencia (suavizamiento exponencial)&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Precio de Cierre de Bitcoin con Suavizamiento Exponencial&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Fecha&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Precio de Cierre (USD)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/d93367c66842384cc3c8b3896685f1c6b7acc137c516be62acf248896949c01e.png" src="_images/d93367c66842384cc3c8b3896685f1c6b7acc137c516be62acf248896949c01e.png" />
+</div>
+</div>
+<p>Esta gráfica confirma lo visto anteriormente, el precio de Bitcoin ha mostrado ciclos de mercado claros cada cuatro años, coincidiendo con los halvings. Tras una consolidación entre 2018 y 2020, experimentó un alza significativa en 2021, seguida de una corrección en 2022. A partir de 2023, inició un nuevo ciclo alcista, alcanzando máximos históricos en 2025. Esto confirma la tendencia alcista a largo plazo de Bitcoin, a pesar de su volatilidad.</p>
+</section>
+<section id="analisis-de-estacionaridad">
+<h3>Análisis de Estacionaridad<a class="headerlink" href="#analisis-de-estacionaridad" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prueba de Dickey-Fuller aumentada (ADF)</span>
+
+<span class="k">def</span> <span class="nf">test_stationarity</span><span class="p">(</span><span class="n">timeseries</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Resultados de la prueba de Dickey-Fuller:&#39;</span><span class="p">)</span>
+    <span class="n">dftest</span> <span class="o">=</span> <span class="n">adfuller</span><span class="p">(</span><span class="n">timeseries</span><span class="p">,</span> <span class="n">autolag</span><span class="o">=</span><span class="s1">&#39;AIC&#39;</span><span class="p">)</span>
+    <span class="n">dfoutput</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">dftest</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Estadístico&#39;</span><span class="p">,</span> <span class="s1">&#39;p-valor&#39;</span><span class="p">,</span> <span class="s1">&#39;#Lags&#39;</span><span class="p">,</span> <span class="s1">&#39;Observaciones&#39;</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">dftest</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">dfoutput</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;Valor crítico (</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">dfoutput</span><span class="p">)</span>
+
+<span class="n">test_stationarity</span><span class="p">(</span><span class="n">dfs</span><span class="p">[</span><span class="s2">&quot;15m&quot;</span><span class="p">][</span><span class="s2">&quot;Close&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resultados de la prueba de Dickey-Fuller:
+Estadístico                 0.304424
+p-valor                     0.977547
+#Lags                      84.000000
+Observaciones          248312.000000
+Valor crítico (1%)         -3.430376
+Valor crítico (5%)         -2.861552
+Valor crítico (10%)        -2.566776
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Estos resultados de la prueba de Dickey-Fuller para la serie temporal del precio de Bitcoin indican claramente que la serie no es estacionaria. El estadístico de prueba de -0.040965 está muy por encima de todos los valores críticos, incluso del menos estricto al 10% (-2.566776). El p-valor extremadamente alto de 0.977547 confirma que no podemos rechazar la hipótesis nula de que existe una raíz unitaria en la serie.</p>
+<p>Esta prueba confirma formalmente lo que sugerían los gráficos de autocorrelación: el precio de Bitcoin presenta una tendencia persistente y no revierte a una media constante a lo largo del tiempo. Para realizar análisis estadísticos adecuados o construir modelos predictivos, sería necesario transformar la serie mediante diferenciación u otros métodos para conseguir estacionariedad. Este resultado es típico en series de precios de activos financieros y coincide con la teoría de que los mercados financieros suelen seguir un comportamiento similar al de un paseo aleatorio.</p>
+</section>
+</section>
+<section id="transformacion-de-datos">
+<h2>Transformación de datos<a class="headerlink" href="#transformacion-de-datos" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dfs</span><span class="p">[</span><span class="s2">&quot;15m&quot;</span><span class="p">][</span><span class="s2">&quot;Close_diff&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">[</span><span class="s2">&quot;15m&quot;</span><span class="p">][</span><span class="s2">&quot;Close&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span>
+<span class="n">test_stationarity</span><span class="p">(</span><span class="n">dfs</span><span class="p">[</span><span class="s2">&quot;15m&quot;</span><span class="p">][</span><span class="s2">&quot;Close_diff&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">())</span>
+
+<span class="c1"># Graficar ACF Y PACF de la serie diferenciada</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">211</span><span class="p">)</span>
+<span class="n">plot_acf</span><span class="p">(</span><span class="n">dfs</span><span class="p">[</span><span class="s2">&quot;15m&quot;</span><span class="p">][</span><span class="s2">&quot;Close_diff&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">(),</span> <span class="n">lags</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Autocorrelación (ACF) - Serie Diferenciada&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">212</span><span class="p">)</span>
+<span class="n">plot_pacf</span><span class="p">(</span><span class="n">dfs</span><span class="p">[</span><span class="s2">&quot;15m&quot;</span><span class="p">][</span><span class="s2">&quot;Close_diff&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">(),</span> <span class="n">lags</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Autocorrelación Parcial (PACF) - Serie Diferenciada&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resultados de la prueba de Dickey-Fuller:
+Estadístico               -53.495730
+p-valor                     0.000000
+#Lags                      85.000000
+Observaciones          248310.000000
+Valor crítico (1%)         -3.430376
+Valor crítico (5%)         -2.861552
+Valor crítico (10%)        -2.566776
+dtype: float64
+</pre></div>
+</div>
+<img alt="_images/f15132cc27454ef97e46aabff1a4044789bf972e7c35c74ae2c414e224f56e0a.png" src="_images/f15132cc27454ef97e46aabff1a4044789bf972e7c35c74ae2c414e224f56e0a.png" />
+</div>
+</div>
+<p>Los resultados de la prueba de Dickey-Fuller para la serie diferenciada del precio de Bitcoin muestran un cambio drástico respecto a la serie original. El estadístico de prueba de -53.495730 es significativamente menor que todos los valores críticos (-3.430376 al 1%, -2.861552 al 5% y -2.566776 al 10%), y el p-valor extremadamente bajo de 0.000000 indica que podemos rechazar con gran confianza la hipótesis nula de no estacionariedad. Esto confirma que la serie diferenciada es estacionaria, lo que significa que sus propiedades estadísticas (como la media y la varianza) se mantienen constantes a lo largo del tiempo.</p>
+<p>La diferenciación, que calcula los cambios en el precio en intervalos de 15 minutos en lugar de los precios absolutos, ha eliminado la tendencia persistente y ha estabilizado la serie.</p>
+<p>Análisis de las gráficas ACF y PACF:</p>
+<p>La función de autocorrelación (ACF) muestra que la mayoría de los rezagos están dentro del intervalo de confianza, lo que sugiere que la serie diferenciada no tiene autocorrelaciones significativas en términos de tendencia o estacionalidad fuerte.</p>
+<p>La función de autocorrelación parcial (PACF) también indica que no hay rezagos con una autocorrelación parcial destacada, lo que sugiere que los efectos de los valores pasados en la serie diferenciada son mínimos.</p>
+<p>En resumen, las gráficas de ACF y PACF de la serie diferenciada muestran que la mayoría de los rezagos están dentro del intervalo de confianza, lo que sugiere que no hay autocorrelaciones significativas en términos de tendencia o estacionalidad fuerte. Sin embargo, se observa una ligera autocorrelación en los primeros rezagos, lo que indica una dependencia de corto plazo.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="conclusiones-finales">
+<h1>Conclusiones finales<a class="headerlink" href="#conclusiones-finales" title="Link to this heading">#</a></h1>
+<p>El análisis exploratorio de datos (EDA) del precio de cierre de Bitcoin ha revelado una serie de patrones y características clave que son fundamentales para entender su comportamiento:</p>
+<p>Tendencia General: Bitcoin ha mostrado una tendencia alcista a largo plazo, con ciclos de mercado claros que coinciden con eventos importantes como halvings y crisis en el ecosistema cripto.</p>
+<p>Volatilidad: El precio de Bitcoin es altamente volátil, con fluctuaciones significativas en períodos cortos. Esta volatilidad está influenciada por eventos externos, como noticias económicas y cambios regulatorios.</p>
+<p>Estacionalidad: Se han identificado patrones recurrentes en los datos, especialmente en ciclos anuales. Estos patrones sugieren que Bitcoin tiende a tener períodos predecibles de mayor y menor actividad.</p>
+<p>Anomalías: Los valores atípicos detectados en los residuos están asociados con eventos extremos, como el colapso de FTX en 2022. Estos eventos tienen un impacto significativo en el precio y la confianza del mercado.</p>
+<p>Estacionariedad: La serie original no es estacionaria, pero la diferenciación ha permitido lograr estacionariedad, lo que es crucial para la aplicación de modelos predictivos.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="EDA%20Home%20Credit%20V2.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Análisis Exploratorio de Datos (EDA) - Home Credit Default Risk</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">EDA BITCOIN</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-es-bitcoin">¿Qué es BITCOIN?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descripcion-de-los-datos">Descripción de los datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivo-del-analisis">Objetivo del análisis</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-exploratorio-de-datos-bitcoin">Análisis exploratorio de datos - BITCOIN</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-preliminar">Análisis preliminar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion-de-la-serie">Visualización de la serie</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion-temporal">Visualización temporal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-la-volatilidad-intradia">Análisis de la volatilidad intradía</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-del-precio-de-cierre-y-volumen-de-bitcoin">Interpretación del Precio de Cierre y Volumen de Bitcoin</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-estacionalidad-y-periodicidad-frecuencia-1-dia">Análisis de Estacionalidad y Periodicidad (Frecuencia: 1 día)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deteccion-de-anomalias">Detección de Anomalías</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-autocorrelacion">Análisis de autocorrelación</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-tendencia">Análisis de tendencia</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-estacionaridad">Análisis de Estacionaridad</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformacion-de-datos">Transformación de datos</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusiones-finales">Conclusiones finales</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Eliana Fuentes, Nicolás Rodriguez y Maria Camila Vargas
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>© 2024 Eliana Fuentes, Nicolás Rodriguez y Maria Camila Vargas</p>
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
