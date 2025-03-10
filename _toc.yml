@@ -1,0 +1,5 @@
+format: jb-book
+root: intro
+chapters:
+- file: "EDA Home Credit V2"
+- file: "bitcoin"
