@@ -184,9 +184,6 @@
 
 
 
-
-
-
 <li class="toctree-l1"><a class="reference internal" href="bitcoin.html">EDA BITCOIN</a></li>
 
 
@@ -404,8 +401,8 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Conclusión</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-correlacion-variables-numericas">Analisis de Correlación (Variables Numéricas)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion">Interpretación</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-correlacion-variables-numericas">Analisis de Correlación (Variables Numéricas)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion">Interpretación</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#puntajes-de-riesgo-externo">1. Puntajes de Riesgo Externo</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#factores-financieros">2. Factores Financieros</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#factores-demograficos-y-de-informacion-de-contacto">3. Factores Demográficos y de Información de Contacto</a></li>
@@ -456,15 +453,18 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-reject-reason">4. CODE_REJECT_REASON</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#name-contract-status">5. NAME_CONTRACT_STATUS</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">Conclusión</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limpieza-de-datos">Limpieza de datos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-regresion-logistica-con-penalizacion-l1-y-l2">Modelo de regresión Logistica con penalización L1 y L2</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-clasificacion-random-forest">Modelo de clasificación Random Forest</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-clasificacion-xgboost">Modelo de clasificación XGBoost</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-clasificacion-con-regresion-bayesiana">Modelo de clasificación con Regresión Bayesiana</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-clasificacion-lightgbm">Modelo de clasificación LightGBM</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-clasificacion-original-logistic-lightforest-cross-stacking">Modelo de clasificación original Logistic LightForest Cross Stacking</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#limpieza-de-datos">Limpieza de datos</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#despliegue-de-modelos">Despliegue de Modelos</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-regresion-logistica-con-penalizacion-l1-y-l2">Modelo de regresión Logistica con penalización L1 y L2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-clasificacion-random-forest">Modelo de clasificación Random Forest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-clasificacion-xgboost">Modelo de clasificación XGBoost</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-clasificacion-con-regresion-bayesiana">Modelo de clasificación con Regresión Bayesiana</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-clasificacion-lightgbm">Modelo de clasificación LightGBM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-clasificacion-original-logistic-lightforest-cross-stacking">Modelo de clasificación original Logistic LightForest Cross Stacking</a></li>
+</ul>
+</li>
 </ul>
 
             </nav>
@@ -1762,10 +1762,10 @@ Name: TARGET, dtype: float64
 </div>
 </div>
 </div>
-</section>
 <section id="interpretacion">
-<h2>Interpretación<a class="headerlink" href="#interpretacion" title="Link to this heading">#</a></h2>
+<h3>Interpretación<a class="headerlink" href="#interpretacion" title="Link to this heading">#</a></h3>
 <p>El análisis de correlación revela las variables con mayor relación con <strong>TARGET</strong>, lo que permite identificar los factores más influyentes en la predicción del incumplimiento crediticio.</p>
+</section>
 <section id="puntajes-de-riesgo-externo">
 <h3>1. Puntajes de Riesgo Externo<a class="headerlink" href="#puntajes-de-riesgo-externo" title="Link to this heading">#</a></h3>
 <ul class="simple">
@@ -2196,43 +2196,44 @@ DAYS_LAST_PHONE_CHANGE               1.264442e-37                         0.0  -
 <section id="organization-type">
 <h2>1. ORGANIZATION_TYPE<a class="headerlink" href="#organization-type" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Los clientes que trabajan en ciertos sectores, como <strong>Business Entity Type 3, Government y Electricity</strong>, tienen una alta representación en la base de datos y también presentan ciertos niveles de incumplimiento, aunque siempre en menor proporción respecto a los cumplidor###.</p></li>
+<li><p>Los clientes que trabajan en ciertos sectores, como <strong>Business Entity Type 3, Government y Electricity</strong>, tienen una alta representación en la base de datos y también presentan ciertos niveles de incumplimiento, aunque siempre en menor proporción respecto a los cumplidor####.</p></li>
 </ul>
 </section>
 <section id="name-income-type">
 <h2>2. NAME_INCOME_TYPE<a class="headerlink" href="#name-income-type" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>La mayoría de los clientes con ingresos provienen de la categoría <strong>Working (trabajadores dependientes)</strong>, seguida de <strong>Commercial associate y Pensioner</strong>.</p></li>
-<li><p>Aunque en todas las categorías la proporción de incumplimiento es baja, se puede notar que los <strong>desempleados y trabajadores informales</strong> tienen una proporción ligeramente mayor de incumplimiento en comparación con otros gr#upos.</p></li>
+<li><p>Aunque en todas las categorías la proporción de incumplimiento es baja, se puede notar que los <strong>desempleados y trabajadores informales</strong> tienen una proporción ligeramente mayor de incumplimiento en comparación con otros g#r#upos.</p></li>
 </ul>
 </section>
 <section id="occupation-type">
 <h2>3. OCCUPATION_TYPE<a class="headerlink" href="#occupation-type" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Las ocupaciones más comunes son <strong>Laborers, Core Staff y Accountants</strong>, con la mayoría de los clientes cumpliendo con sus pagos.</p></li>
-<li><p>Sin embargo, ciertas ocupaciones pueden presentar un mayor riesgo relativo de incumplimiento, como <strong>Low-skill laborers y Waiters/Barmen staff</strong>, aunque siguen siendo minoría dentro de sus respectivas ca#tegorías.</p></li>
+<li><p>Sin embargo, ciertas ocupaciones pueden presentar un mayor riesgo relativo de incumplimiento, como <strong>Low-skill laborers y Waiters/Barmen staff</strong>, aunque siguen siendo minoría dentro de sus respectivas c#a#tegorías.</p></li>
 </ul>
 </section>
 <section id="code-reject-reason">
 <h2>4. CODE_REJECT_REASON<a class="headerlink" href="#code-reject-reason" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>La mayoría de los rechazos de crédito están etiquetados bajo la categoría <strong>XAP</strong>, que también muestra la mayor cantidad de incumplidores dentro del grupo.</p></li>
-<li><p>Algunas otras razones, como <strong>LIMIT y HC</strong>, presentan una mayor proporción de incumplimiento en comparación con las demás razone#s de rechazo.</p></li>
+<li><p>Algunas otras razones, como <strong>LIMIT y HC</strong>, presentan una mayor proporción de incumplimiento en comparación con las demás razon#e#s de rechazo.</p></li>
 </ul>
 </section>
 <section id="name-contract-status">
 <h2>5. NAME_CONTRACT_STATUS<a class="headerlink" href="#name-contract-status" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Los contratos <strong>Approved</strong> (aprobados) son la categoría predominante, con una gran mayoría de clientes que cumplen con sus pagos.</p></li>
-<li><p>Sin embargo, en contratos <strong>Canceled y Refused</strong>, la proporción de incumplimiento es levemente más alta en comparación con los con#tratos aprobados.</p></li>
+<li><p>Sin embargo, en contratos <strong>Canceled y Refused</strong>, la proporción de incumplimiento es levemente más alta en comparación con los co#n#tratos aprobados.</p></li>
 </ul>
 </section>
 <section id="id9">
 <h2>Conclusión<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
 <p>Si bien <strong>la gran mayoría de los clientes han cumplido con sus pagos (TARGET = 0)</strong>, algunas categorías de ocupación, fuente de ingresos y tipo de organización presentan proporciones de incumplimiento ligeramente más altas. Estas diferencias pueden ser útiles para mejorar modelos predictivos de riesgo crediticio y ajustar estrategias de aprobación de crédito.</p>
 </section>
-<section id="limpieza-de-datos">
-<h2>Limpieza de datos<a class="headerlink" href="#limpieza-de-datos" title="Link to this heading">#</a></h2>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="limpieza-de-datos">
+<h1>Limpieza de datos<a class="headerlink" href="#limpieza-de-datos" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -2346,6 +2347,10 @@ DAYS_LAST_PHONE_CHANGE               1.264442e-37                         0.0  -
 </div>
 </div>
 </section>
+<section class="tex2jax_ignore mathjax_ignore" id="despliegue-de-modelos">
+<h1>Despliegue de Modelos<a class="headerlink" href="#despliegue-de-modelos" title="Link to this heading">#</a></h1>
+<p>Luego de realizar un exhaustivo proceso de limpieza, transformación y análisis exploratorio de los datos, se procedió a entrenar distintos modelos de clasificación supervisada con el fin de predecir el riesgo crediticio de los clientes de Home Credit. Dado el fuerte desbalance en la variable objetivo y la alta dimensionalidad del conjunto de datos, se aplicaron técnicas específicas como SMOTE para balancear las clases, normalización para escalar variables numéricas, y selección de características para optimizar el rendimiento.</p>
+<p>Se entrenaron y compararon múltiples algoritmos, incluyendo Regresión Logística (con penalización L1 y L2), Naive Bayes, Random Forest, XGBoost, LightGBM y un modelo original propuesto llamado Logistic LightForest Cross Stacking, el cual combina las fortalezas de Random Forest y LightGBM, junto con una regresión logística como modelo meta. Cada modelo fue evaluado utilizando métricas como precisión, recall, F1-score, AUC y tiempo de ejecución, permitiendo identificar cuál es el más eficiente y robusto para este caso de uso.</p>
 <section id="modelo-de-regresion-logistica-con-penalizacion-l1-y-l2">
 <h2>Modelo de regresión Logistica con penalización L1 y L2<a class="headerlink" href="#modelo-de-regresion-logistica-con-penalizacion-l1-y-l2" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
@@ -2452,9 +2457,8 @@ Porcentaje de datos usados: 91.38%
 </div>
 </div>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="modelo-de-clasificacion-random-forest">
-<h1>Modelo de clasificación Random Forest<a class="headerlink" href="#modelo-de-clasificacion-random-forest" title="Link to this heading">#</a></h1>
+<section id="modelo-de-clasificacion-random-forest">
+<h2>Modelo de clasificación Random Forest<a class="headerlink" href="#modelo-de-clasificacion-random-forest" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
@@ -2534,8 +2538,8 @@ Porcentaje de datos usados: 91.38%
 </div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="modelo-de-clasificacion-xgboost">
-<h1>Modelo de clasificación XGBoost<a class="headerlink" href="#modelo-de-clasificacion-xgboost" title="Link to this heading">#</a></h1>
+<section id="modelo-de-clasificacion-xgboost">
+<h2>Modelo de clasificación XGBoost<a class="headerlink" href="#modelo-de-clasificacion-xgboost" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">xgboost</span> <span class="kn">import</span> <span class="n">XGBClassifier</span>
@@ -2617,8 +2621,8 @@ Porcentaje de datos usados: 91.38%
 </div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="modelo-de-clasificacion-con-regresion-bayesiana">
-<h1>Modelo de clasificación con Regresión Bayesiana<a class="headerlink" href="#modelo-de-clasificacion-con-regresion-bayesiana" title="Link to this heading">#</a></h1>
+<section id="modelo-de-clasificacion-con-regresion-bayesiana">
+<h2>Modelo de clasificación con Regresión Bayesiana<a class="headerlink" href="#modelo-de-clasificacion-con-regresion-bayesiana" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">BernoulliNB</span>
@@ -2690,8 +2694,8 @@ Porcentaje de datos usados: 91.38%
 </div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="modelo-de-clasificacion-lightgbm">
-<h1>Modelo de clasificación LightGBM<a class="headerlink" href="#modelo-de-clasificacion-lightgbm" title="Link to this heading">#</a></h1>
+<section id="modelo-de-clasificacion-lightgbm">
+<h2>Modelo de clasificación LightGBM<a class="headerlink" href="#modelo-de-clasificacion-lightgbm" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">lightgbm</span> <span class="kn">import</span> <span class="n">LGBMClassifier</span>
@@ -2775,8 +2779,8 @@ Porcentaje de datos usados: 91.38%
 </div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="modelo-de-clasificacion-original-logistic-lightforest-cross-stacking">
-<h1>Modelo de clasificación original Logistic LightForest Cross Stacking<a class="headerlink" href="#modelo-de-clasificacion-original-logistic-lightforest-cross-stacking" title="Link to this heading">#</a></h1>
+<section id="modelo-de-clasificacion-original-logistic-lightforest-cross-stacking">
+<h2>Modelo de clasificación original Logistic LightForest Cross Stacking<a class="headerlink" href="#modelo-de-clasificacion-original-logistic-lightforest-cross-stacking" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span><span class="p">,</span> <span class="n">StackingClassifier</span>
@@ -2868,6 +2872,7 @@ Porcentaje de datos usados: 91.38%
 </div>
 </div>
 </section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -2952,8 +2957,8 @@ Porcentaje de datos usados: 91.38%
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Conclusión</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-correlacion-variables-numericas">Analisis de Correlación (Variables Numéricas)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion">Interpretación</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-correlacion-variables-numericas">Analisis de Correlación (Variables Numéricas)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion">Interpretación</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#puntajes-de-riesgo-externo">1. Puntajes de Riesgo Externo</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#factores-financieros">2. Factores Financieros</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#factores-demograficos-y-de-informacion-de-contacto">3. Factores Demográficos y de Información de Contacto</a></li>
@@ -3004,15 +3009,18 @@ Porcentaje de datos usados: 91.38%
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-reject-reason">4. CODE_REJECT_REASON</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#name-contract-status">5. NAME_CONTRACT_STATUS</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">Conclusión</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limpieza-de-datos">Limpieza de datos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-regresion-logistica-con-penalizacion-l1-y-l2">Modelo de regresión Logistica con penalización L1 y L2</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-clasificacion-random-forest">Modelo de clasificación Random Forest</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-clasificacion-xgboost">Modelo de clasificación XGBoost</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-clasificacion-con-regresion-bayesiana">Modelo de clasificación con Regresión Bayesiana</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-clasificacion-lightgbm">Modelo de clasificación LightGBM</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-clasificacion-original-logistic-lightforest-cross-stacking">Modelo de clasificación original Logistic LightForest Cross Stacking</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#limpieza-de-datos">Limpieza de datos</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#despliegue-de-modelos">Despliegue de Modelos</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-regresion-logistica-con-penalizacion-l1-y-l2">Modelo de regresión Logistica con penalización L1 y L2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-clasificacion-random-forest">Modelo de clasificación Random Forest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-clasificacion-xgboost">Modelo de clasificación XGBoost</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-clasificacion-con-regresion-bayesiana">Modelo de clasificación con Regresión Bayesiana</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-clasificacion-lightgbm">Modelo de clasificación LightGBM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-clasificacion-original-logistic-lightforest-cross-stacking">Modelo de clasificación original Logistic LightForest Cross Stacking</a></li>
+</ul>
+</li>
 </ul>
 
   </nav></div>
