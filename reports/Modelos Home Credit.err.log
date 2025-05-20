@@ -22,23 +22,45 @@ import pandas as pd
 import numpy as np
 import os
 
-# Lista de archivos en la carpeta
-archivos = {
-    "train_final":"train_final.csv",
-}
-# Cargar archivos sin procesar
-data = {nombre: pd.read_csv(archivo, low_memory=False) for nombre, archivo in archivos.items()}
+# Intenta leer el archivo con diferentes codificaciones
+try:
+    description = pd.read_csv("HomeCredit_Columns_description.csv", encoding="utf-8")
+except UnicodeDecodeError:
+    description = pd.read_csv("HomeCredit_Columns_description.csv", encoding="ISO-8859-1")  # Alternativa
+
+# Extraer train_final
+train_final = data["train_final"]
+
+# Extraer las variables únicas de train_final en un DataFrame
+train_variables = pd.DataFrame(train_final.columns, columns=["Row"]).drop_duplicates()
+
+# Eliminar duplicados en el DataFrame de descripciones para evitar repetición de variables
+description_cleaned = description[['Row', 'Description']].drop_duplicates()
+
+# Cruzar con el DataFrame de descripciones
+merged_df = train_variables.merge(description_cleaned, on="Row", how="left")
+
+# Configurar Pandas para mostrar toda la tabla sin truncamientos
+pd.set_option('display.max_rows', None)  # Mostrar todas las filas
+pd.set_option('display.max_columns', None)  # Mostrar todas las columnas
+pd.set_option('display.max_colwidth', None)  # Evitar que se corte el texto en columnas largas
+pd.set_option('display.expand_frame_repr', False)  # Evita que las columnas se dividan en varias líneas
+
+# Mostrar la tabla completa en Jupyter Notebook
+from IPython.display import display
+display(merged_df)
+
 ------------------
 
 
 [1;31m---------------------------------------------------------------------------[0m
 [1;31mFileNotFoundError[0m                         Traceback (most recent call last)
-Cell [1;32mIn[1], line 10[0m
-[0;32m      6[0m archivos [38;5;241m=[39m {
-[0;32m      7[0m     [38;5;124m"[39m[38;5;124mtrain_final[39m[38;5;124m"[39m:[38;5;124m"[39m[38;5;124mtrain_final.csv[39m[38;5;124m"[39m,
-[0;32m      8[0m }
-[0;32m      9[0m [38;5;66;03m# Cargar archivos sin procesar[39;00m
-[1;32m---> 10[0m data [38;5;241m=[39m {nombre: pd[38;5;241m.[39mread_csv(archivo, low_memory[38;5;241m=[39m[38;5;28;01mFalse[39;00m) [38;5;28;01mfor[39;00m nombre, archivo [38;5;129;01min[39;00m archivos[38;5;241m.[39mitems()}
+Cell [1;32mIn[2], line 7[0m
+[0;32m      5[0m [38;5;66;03m# Intenta leer el archivo con diferentes codificaciones[39;00m
+[0;32m      6[0m [38;5;28;01mtry[39;00m:
+[1;32m----> 7[0m     description [38;5;241m=[39m pd[38;5;241m.[39mread_csv([38;5;124m"[39m[38;5;124mHomeCredit_Columns_description.csv[39m[38;5;124m"[39m, encoding[38;5;241m=[39m[38;5;124m"[39m[38;5;124mutf-8[39m[38;5;124m"[39m)
+[0;32m      8[0m [38;5;28;01mexcept[39;00m [38;5;167;01mUnicodeDecodeError[39;00m:
+[0;32m      9[0m     description [38;5;241m=[39m pd[38;5;241m.[39mread_csv([38;5;124m"[39m[38;5;124mHomeCredit_Columns_description.csv[39m[38;5;124m"[39m, encoding[38;5;241m=[39m[38;5;124m"[39m[38;5;124mISO-8859-1[39m[38;5;124m"[39m)  [38;5;66;03m# Alternativa[39;00m
 
 File [1;32m~\anaconda3\Lib\site-packages\pandas\io\parsers\readers.py:1026[0m, in [0;36mread_csv[1;34m(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options, dtype_backend)[0m
 [0;32m   1013[0m kwds_defaults [38;5;241m=[39m _refine_defaults_read(
@@ -78,22 +100,18 @@ File [1;32m~\anaconda3\Lib\site-packages\pandas\io\parsers\readers.py:1880[0m,
 [0;32m   1890[0m [38;5;28;01massert[39;00m [38;5;28mself[39m[38;5;241m.[39mhandles [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m
 [0;32m   1891[0m f [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39mhandles[38;5;241m.[39mhandle
 
-File [1;32m~\anaconda3\Lib\site-packages\pandas\io\common.py:873[0m, in [0;36mget_handle[1;34m(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)[0m
-[0;32m    868[0m [38;5;28;01melif[39;00m [38;5;28misinstance[39m(handle, [38;5;28mstr[39m):
-[0;32m    869[0m     [38;5;66;03m# Check whether the filename is to be opened in binary mode.[39;00m
-[0;32m    870[0m     [38;5;66;03m# Binary mode does not support 'encoding' and 'newline'.[39;00m
-[0;32m    871[0m     [38;5;28;01mif[39;00m ioargs[38;5;241m.[39mencoding [38;5;129;01mand[39;00m [38;5;124m"[39m[38;5;124mb[39m[38;5;124m"[39m [38;5;129;01mnot[39;00m [38;5;129;01min[39;00m ioargs[38;5;241m.[39mmode:
-[0;32m    872[0m         [38;5;66;03m# Encoding[39;00m
-[1;32m--> 873[0m         handle [38;5;241m=[39m [38;5;28mopen[39m(
+File [1;32m~\anaconda3\Lib\site-packages\pandas\io\common.py:882[0m, in [0;36mget_handle[1;34m(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)[0m
+[0;32m    873[0m         handle [38;5;241m=[39m [38;5;28mopen[39m(
 [0;32m    874[0m             handle,
 [0;32m    875[0m             ioargs[38;5;241m.[39mmode,
-[0;32m    876[0m             encoding[38;5;241m=[39mioargs[38;5;241m.[39mencoding,
-[0;32m    877[0m             errors[38;5;241m=[39merrors,
+[1;32m   (...)[0m
 [0;32m    878[0m             newline[38;5;241m=[39m[38;5;124m"[39m[38;5;124m"[39m,
 [0;32m    879[0m         )
 [0;32m    880[0m     [38;5;28;01melse[39;00m:
 [0;32m    881[0m         [38;5;66;03m# Binary mode[39;00m
-[0;32m    882[0m         handle [38;5;241m=[39m [38;5;28mopen[39m(handle, ioargs[38;5;241m.[39mmode)
+[1;32m--> 882[0m         handle [38;5;241m=[39m [38;5;28mopen[39m(handle, ioargs[38;5;241m.[39mmode)
+[0;32m    883[0m     handles[38;5;241m.[39mappend(handle)
+[0;32m    885[0m [38;5;66;03m# Convert BytesIO or file objects passed with an encoding[39;00m
 
-[1;31mFileNotFoundError[0m: [Errno 2] No such file or directory: 'train_final.csv'
+[1;31mFileNotFoundError[0m: [Errno 2] No such file or directory: 'HomeCredit_Columns_description.csv'
 
