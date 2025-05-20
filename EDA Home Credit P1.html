@@ -57,10 +57,10 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'EDA Home Credit V2';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'EDA Home Credit P1';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="ANÁLISIS SERIES DE TIEMPO DE BITCOIN" href="bitcoin.html" />
+    <link rel="next" title="Evaluación de Modelos - Home Credit Default Risk" href="Modelos%20Home%20Credit.html" />
     <link rel="prev" title="Bienvenido a nuestro proyecto final 🚀" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -181,6 +181,10 @@
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Análisis Exploratorio de Datos (EDA) - Home Credit Default Risk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Modelos%20Home%20Credit.html">Evaluación de Modelos - Home Credit Default Risk</a></li>
+
+
+
 
 
 <li class="toctree-l1"><a class="reference internal" href="bitcoin.html">ANÁLISIS SERIES DE TIEMPO DE BITCOIN</a></li>
@@ -284,7 +288,7 @@
       
       
       
-      <li><a href="https://github.com/nicoplayz58/home-credit/issues/new?title=Issue%20on%20page%20%2FEDA Home Credit V2.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/nicoplayz58/home-credit/issues/new?title=Issue%20on%20page%20%2FEDA Home Credit P1.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -314,7 +318,7 @@
       
       
       
-      <li><a href="_sources/EDA Home Credit V2.ipynb" target="_blank"
+      <li><a href="_sources/EDA Home Credit P1.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -408,7 +412,6 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Análisis Exploratorio de Datos (EDA) - Home Credit Default Risk</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">Introducción</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivos-del-eda">Objetivos del EDA</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carga-de-datos">Carga de datos</a></li>
@@ -479,18 +482,6 @@ document.write(`
 </ul>
 </li>
 </ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#limpieza-de-datos">Limpieza de datos</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#despliegue-de-modelos">Despliegue de modelos</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-regresion-logistica-con-penalizacion-l1-y-l2">Modelo de regresión logística con penalización L1 Y L2</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-clasificacion-naive-bayes">Modelo de clasificación Naive Bayes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-clasificacion-random-forest">Modelo de clasificación Random Forest</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-clasificacion-xgboost">Modelo de clasificación XGBoost</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-clasificacion-svm">Modelo de clasificación SVM</a></li>
-</ul>
-</li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -529,7 +520,6 @@ Visualizar los datos de manera efectiva: Utilizar gráficos e histogramas para d
 <span class="c1"># Lista de archivos en la carpeta</span>
 <span class="n">archivos</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;train_final&quot;</span><span class="p">:</span><span class="s2">&quot;train_final.csv&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;test_final&quot;</span><span class="p">:</span> <span class="s2">&quot;test_final.csv&quot;</span>
 <span class="p">}</span>
 <span class="c1"># Cargar archivos sin procesar</span>
 <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="n">nombre</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">archivo</span><span class="p">,</span> <span class="n">low_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="k">for</span> <span class="n">nombre</span><span class="p">,</span> <span class="n">archivo</span> <span class="ow">in</span> <span class="n">archivos</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
@@ -539,13 +529,12 @@ Visualizar los datos de manera efectiva: Utilizar gráficos e histogramas para d
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">11</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">10</span>
 <span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">archivos</span> <span class="o">=</span> <span class="p">{</span>
 <span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="s2">&quot;train_final&quot;</span><span class="p">:</span><span class="s2">&quot;train_final.csv&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="s2">&quot;test_final&quot;</span><span class="p">:</span> <span class="s2">&quot;test_final.csv&quot;</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="p">}</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="c1"># Cargar archivos sin procesar</span>
-<span class="ne">---&gt; </span><span class="mi">11</span> <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="n">nombre</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">archivo</span><span class="p">,</span> <span class="n">low_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="k">for</span> <span class="n">nombre</span><span class="p">,</span> <span class="n">archivo</span> <span class="ow">in</span> <span class="n">archivos</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="p">}</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="c1"># Cargar archivos sin procesar</span>
+<span class="ne">---&gt; </span><span class="mi">10</span> <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="n">nombre</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">archivo</span><span class="p">,</span> <span class="n">low_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="k">for</span> <span class="n">nombre</span><span class="p">,</span> <span class="n">archivo</span> <span class="ow">in</span> <span class="n">archivos</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
 
 <span class="nn">File ~\anaconda3\Lib\site-packages\pandas\io\parsers\readers.py:1026,</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options, dtype_backend)</span>
 <span class="g g-Whitespace">   </span><span class="mi">1013</span> <span class="n">kwds_defaults</span> <span class="o">=</span> <span class="n">_refine_defaults_read</span><span class="p">(</span>
@@ -610,13 +599,11 @@ Visualizar los datos de manera efectiva: Utilizar gráficos e histogramas para d
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shape del dataset de entrenamiento final:&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;train_final&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shape del dataset de prueba final:&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;test_final&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shape del dataset de entrenamiento final: (1430155, 180)
-Shape del dataset de prueba final: (257457, 179)
 </pre></div>
 </div>
 </div>
@@ -1605,29 +1592,34 @@ Shape del dataset de prueba final: (257457, 179)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Distribución de TARGET</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">train_final</span><span class="p">[</span><span class="s2">&quot;TARGET&quot;</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribución de la variable TARGET&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;TARGET (0 = Buen comportamiento, 1 = Mal comportamiento)&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Cantidad de registros (Millones)&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Contar la cantidad de cada clase</span>
+<span class="n">target_counts</span> <span class="o">=</span> <span class="n">train_final</span><span class="p">[</span><span class="s2">&quot;TARGET&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
 
-<span class="c1"># Proporción de clases</span>
-<span class="n">target_counts</span> <span class="o">=</span> <span class="n">train_final</span><span class="p">[</span><span class="s2">&quot;TARGET&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Proporción de la variable TARGET:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">target_counts</span><span class="p">)</span>
+<span class="c1"># Crear gráfico de barras con colores rojo (1) y azul (0)</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;red&quot;</span><span class="p">]</span>  <span class="c1"># 0: azul, 1: rojo</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">bars</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">target_counts</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span> <span class="n">target_counts</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">)</span>
+
+<span class="c1"># Etiquetas y título</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Distribución de la variable TARGET&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;TARGET (0 = Buen comportamiento, 1 = Mal comportamiento)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Frecuencia&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">])</span>
+
+<span class="c1"># Mostrar valores encima de las barras</span>
+<span class="k">for</span> <span class="n">bar</span> <span class="ow">in</span> <span class="n">bars</span><span class="p">:</span>
+    <span class="n">height</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">bar</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">height</span> <span class="o">+</span> <span class="mi">500</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">height</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/68037d87d2bdce736714d500a537b9189990931af6b19a36485ff619b0354eaa.png" src="_images/68037d87d2bdce736714d500a537b9189990931af6b19a36485ff619b0354eaa.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Proporción de la variable TARGET:
- TARGET
-0    91.37576
-1     8.62424
-Name: proportion, dtype: float64
-</pre></div>
-</div>
+<img alt="_images/6d4a4846f84134390b115ed780e073e36be4461efaa1c4db4b483a5175e5db91.png" src="_images/6d4a4846f84134390b115ed780e073e36be4461efaa1c4db4b483a5175e5db91.png" />
 </div>
 </div>
 </section>
@@ -1660,68 +1652,60 @@ Name: proportion, dtype: float64
 <h2>Identificación de datos nulos<a class="headerlink" href="#identificacion-de-datos-nulos" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calcular porcentaje de valores nulos por variable</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
+<span class="kn">import</span> <span class="nn">plotly.io</span> <span class="k">as</span> <span class="nn">pio</span>
+
+<span class="c1"># Calcular el % de valores nulos</span>
 <span class="n">missing_values</span> <span class="o">=</span> <span class="n">train_final</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_final</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
 
-<span class="c1"># Mostrar las variables con más del 50% de valores nulos</span>
-<span class="n">high_missing</span> <span class="o">=</span> <span class="n">missing_values</span><span class="p">[</span><span class="n">missing_values</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Variables con más del 50</span><span class="si">% d</span><span class="s2">e valores nulos:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">high_missing</span><span class="p">)</span>
+<span class="c1"># Filtrar variables con más del 50% de nulos</span>
+<span class="n">high_missing</span> <span class="o">=</span> <span class="n">missing_values</span><span class="p">[</span><span class="n">missing_values</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Crear dataframe para plotly</span>
+<span class="n">missing_df</span> <span class="o">=</span> <span class="n">high_missing</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">missing_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Variable&quot;</span><span class="p">,</span> <span class="s2">&quot;Porcentaje&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Top 10</span>
+<span class="n">top_missing</span> <span class="o">=</span> <span class="n">missing_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;Porcentaje&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Gráfico</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Porcentaje&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Variable&quot;</span><span class="p">,</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">top_missing</span><span class="p">,</span>
+    <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;Blues_r&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># Añadir etiquetas</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">top_missing</span><span class="p">[</span><span class="s2">&quot;Porcentaje&quot;</span><span class="p">]):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">val</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">val</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Top 10 variables con mayor </span><span class="si">% d</span><span class="s2">e valores nulos&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">% d</span><span class="s2">e Nulos&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Variable&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variables con más del 50% de valores nulos:
- RATE_INTEREST_PRIVILEGED        99.665001
-RATE_INTEREST_PRIMARY           99.665001
-AMT_PAYMENT_CURRENT_mean        96.295646
-AMT_BALANCE_std                 94.572057
-AMT_DRAWINGS_CURRENT_sum        94.526118
-AMT_BALANCE_min                 94.526118
-AMT_PAYMENT_CURRENT_sum         94.526118
-AMT_DRAWINGS_CURRENT_mean       94.526118
-AMT_BALANCE_mean                94.526118
-MONTHS_BALANCE_count            94.526118
-AMT_BALANCE_max                 94.526118
-AMT_CREDIT_LIMIT_ACTUAL_mean    94.526118
-COMMONAREA_MEDI                 69.607980
-COMMONAREA_AVG                  69.607980
-COMMONAREA_MODE                 69.607980
-NONLIVINGAPARTMENTS_AVG         69.211729
-NONLIVINGAPARTMENTS_MODE        69.211729
-NONLIVINGAPARTMENTS_MEDI        69.211729
-FONDKAPREMONT_MODE              68.131286
-LIVINGAPARTMENTS_AVG            68.128559
-LIVINGAPARTMENTS_MODE           68.128559
-LIVINGAPARTMENTS_MEDI           68.128559
-FLOORSMIN_AVG                   67.584283
-FLOORSMIN_MODE                  67.584283
-FLOORSMIN_MEDI                  67.584283
-OWN_CAR_AGE                     66.256734
-YEARS_BUILD_MEDI                66.207929
-YEARS_BUILD_AVG                 66.207929
-YEARS_BUILD_MODE                66.207929
-LANDAREA_AVG                    59.116669
-LANDAREA_MEDI                   59.116669
-LANDAREA_MODE                   59.116669
-BASEMENTAREA_MEDI               58.203202
-BASEMENTAREA_AVG                58.203202
-BASEMENTAREA_MODE               58.203202
-EXT_SOURCE_1                    56.385357
-NONLIVINGAREA_MEDI              54.747702
-NONLIVINGAREA_MODE              54.747702
-NONLIVINGAREA_AVG               54.747702
-AMT_DOWN_PAYMENT                53.560209
-RATE_DOWN_PAYMENT               53.560209
-ELEVATORS_AVG                   52.880772
-ELEVATORS_MEDI                  52.880772
-ELEVATORS_MODE                  52.880772
-WALLSMATERIAL_MODE              50.347620
-APARTMENTS_MODE                 50.253224
-APARTMENTS_MEDI                 50.253224
-APARTMENTS_AVG                  50.253224
-dtype: float64
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\ASUS\AppData\Local\Temp\ipykernel_14288\40814951.py:9: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `y` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.barplot(
 </pre></div>
 </div>
+<img alt="_images/07c63f54320614fc54893a381ca0d7a958039dc38f220ee32cdb989bf409d433.png" src="_images/07c63f54320614fc54893a381ca0d7a958039dc38f220ee32cdb989bf409d433.png" />
 </div>
 </div>
 </section>
@@ -1940,24 +1924,57 @@ DAYS_LAST_PHONE_CHANGE               1.264442e-37                         0.0  -
 <h3>Analisis de multicolinealidad (variables numéricas)<a class="headerlink" href="#analisis-de-multicolinealidad-variables-numericas" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Añadir TARGET manualmente al conjunto de variables más correlacionadas</span>
-<span class="n">top_correlated_vars</span> <span class="o">=</span> <span class="n">correlations</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">11</span><span class="p">]</span>  <span class="c1"># Excluye TARGET en sí mismo</span>
-<span class="n">top_correlated_vars</span><span class="p">[</span><span class="s2">&quot;TARGET&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">correlations</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Añade TARGET a la lista</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">plotly.figure_factory</span> <span class="k">as</span> <span class="nn">ff</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">plotly.io</span> <span class="k">as</span> <span class="nn">pio</span>
 
-<span class="c1"># Generar la matriz de correlación incluyendo TARGET</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">train_final</span><span class="p">[</span><span class="n">top_correlated_vars</span><span class="o">.</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">(),</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;coolwarm&quot;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;.2f&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Matriz de correlación incluyendo TARGET&quot;</span><span class="p">)</span>
+<span class="c1"># Solo columnas numéricas</span>
+<span class="n">numeric_df</span> <span class="o">=</span> <span class="n">train_final</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">)</span>
+
+<span class="c1"># Correlación con TARGET</span>
+<span class="n">correlations</span> <span class="o">=</span> <span class="n">numeric_df</span><span class="o">.</span><span class="n">corr</span><span class="p">()[</span><span class="s2">&quot;TARGET&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Seleccionar las 10 más correlacionadas (excluyendo TARGET) + incluir TARGET</span>
+<span class="n">top_vars</span> <span class="o">=</span> <span class="n">correlations</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">11</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">top_vars</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;TARGET&quot;</span><span class="p">)</span>
+
+<span class="c1"># Matriz de correlación</span>
+<span class="n">corr_matrix</span> <span class="o">=</span> <span class="n">numeric_df</span><span class="p">[</span><span class="n">top_vars</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Definir el tamaño del gráfico</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+<span class="c1"># Crear heatmap con anotaciones y paleta tipo RdBu</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span>
+    <span class="n">corr_matrix</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">top_vars</span><span class="p">,</span> <span class="n">top_vars</span><span class="p">],</span>  <span class="c1"># Asegura orden de variables</span>
+    <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;.2f&quot;</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdBu_r&quot;</span><span class="p">,</span>
+    <span class="n">center</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">square</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">cbar_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;shrink&quot;</span><span class="p">:</span> <span class="mf">.75</span><span class="p">},</span>
+    <span class="n">linewidths</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span>
+    <span class="n">annot_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;fontsize&quot;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span> <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;black&quot;</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Matriz de Correlación de las Variables Seleccionadas&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\ASUS\AppData\Local\Temp\ipykernel_23944\4061662299.py:3: FutureWarning: Series.__getitem__ treating keys as positions is deprecated. In a future version, integer keys will always be treated as labels (consistent with DataFrame behavior). To access a value by position, use `ser.iloc[pos]`
-  top_correlated_vars[&quot;TARGET&quot;] = correlations[0]  # Añade TARGET a la lista
-</pre></div>
-</div>
-<img alt="_images/6e2b489bfd7fbe27f90c8827dba9ebca3dfa10d9506492f37b0396e3c77b6496.png" src="_images/6e2b489bfd7fbe27f90c8827dba9ebca3dfa10d9506492f37b0396e3c77b6496.png" />
+<img alt="_images/abdf4858d960063b8323607ab0df19fe5c75c1551cc92280f5e3450bc5d86d46.png" src="_images/abdf4858d960063b8323607ab0df19fe5c75c1551cc92280f5e3450bc5d86d46.png" />
 </div>
 </div>
 </section>
@@ -2098,43 +2115,52 @@ DAYS_LAST_PHONE_CHANGE               1.264442e-37                         0.0  -
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-<span class="c1"># Seleccionar las 10 variables categóricas más correlacionadas con TARGET</span>
-<span class="n">top_categorical_vars</span> <span class="o">=</span> <span class="n">chi2_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>  <span class="c1"># Extrae las 10 más importantes</span>
-<span class="n">top_categorical_vars_list</span> <span class="o">=</span> <span class="n">top_categorical_vars</span><span class="p">[</span><span class="s2">&quot;Variable&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
 
 <span class="c1"># Función para calcular Cramer&#39;s V</span>
 <span class="k">def</span> <span class="nf">cramers_v</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
     <span class="n">contingency_table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-    <span class="n">chi2_stat</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">dof</span><span class="p">,</span> <span class="n">expected</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2_contingency</span><span class="p">(</span><span class="n">contingency_table</span><span class="p">)</span>
+    <span class="n">chi2_stat</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2_contingency</span><span class="p">(</span><span class="n">contingency_table</span><span class="p">)</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">contingency_table</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">chi2_stat</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">contingency_table</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)))</span>
 
-<span class="c1"># Seleccionar las 10 variables categóricas más correlacionadas con TARGET</span>
-<span class="n">top_categorical_vars_list</span> <span class="o">=</span> <span class="n">top_categorical_vars</span><span class="p">[</span><span class="s2">&quot;Variable&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">top_categorical_vars</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="k">else</span> <span class="n">top_categorical_vars</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="c1"># Filtrar variables categóricas</span>
+<span class="n">categorical_vars</span> <span class="o">=</span> <span class="n">train_final</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;object&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span>
 
-<span class="c1"># Crear matriz vacía para almacenar Cramer&#39;s V</span>
+<span class="c1"># Calcular Cramer&#39;s V entre cada variable y TARGET</span>
+<span class="n">cramers_target_scores</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">categorical_vars</span><span class="p">:</span>
+    <span class="n">score</span> <span class="o">=</span> <span class="n">cramers_v</span><span class="p">(</span><span class="n">train_final</span><span class="p">[</span><span class="n">var</span><span class="p">],</span> <span class="n">train_final</span><span class="p">[</span><span class="s2">&quot;TARGET&quot;</span><span class="p">])</span>
+    <span class="n">cramers_target_scores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">var</span><span class="p">,</span> <span class="n">score</span><span class="p">))</span>
+
+<span class="c1"># Ordenar y seleccionar top 10 más asociadas a TARGET</span>
+<span class="n">top_categorical_vars</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">cramers_target_scores</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)[:</span><span class="mi">10</span><span class="p">]</span>
+<span class="n">top_categorical_vars_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">top_categorical_vars</span><span class="p">]</span>
+<span class="n">top_categorical_vars_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;TARGET&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">top_categorical_vars_list</span>  <span class="c1"># Incluir TARGET</span>
+
+<span class="c1"># Crear matriz de Cramer&#39;s V</span>
 <span class="n">cramers_v_matrix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">top_categorical_vars_list</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">top_categorical_vars_list</span><span class="p">))),</span>
                                 <span class="n">index</span><span class="o">=</span><span class="n">top_categorical_vars_list</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">top_categorical_vars_list</span><span class="p">)</span>
 
-<span class="c1"># Calcular Cramer&#39;s V para cada par de variables categóricas</span>
 <span class="k">for</span> <span class="n">var1</span> <span class="ow">in</span> <span class="n">top_categorical_vars_list</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">var2</span> <span class="ow">in</span> <span class="n">top_categorical_vars_list</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">var1</span> <span class="o">==</span> <span class="n">var2</span><span class="p">:</span>
-            <span class="n">cramers_v_matrix</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">var1</span><span class="p">,</span> <span class="n">var2</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># 🔥 Asigna 1.0 en la diagonal principal</span>
+            <span class="n">cramers_v_matrix</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">var1</span><span class="p">,</span> <span class="n">var2</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">cramers_v_matrix</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">var1</span><span class="p">,</span> <span class="n">var2</span><span class="p">]</span> <span class="o">=</span> <span class="n">cramers_v</span><span class="p">(</span><span class="n">train_final</span><span class="p">[</span><span class="n">var1</span><span class="p">],</span> <span class="n">train_final</span><span class="p">[</span><span class="n">var2</span><span class="p">])</span>
 
-<span class="c1"># Crear heatmap de correlación entre variables categóricas con Cramer&#39;s V</span>
+<span class="c1"># Graficar heatmap</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">cramers_v_matrix</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;coolwarm&quot;</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;.2f&quot;</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Matriz de correlación entre las 10 variables categóricas más correlacionadas con TARGET (Cramer&#39;s V)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Matriz de Cramer&#39;s V - Variables categóricas más correlacionadas con TARGET&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/7a8e0dc14189d1abfed3dfaa31438bce12fe0ce33040a5b60d6f8e86a9b4606f.png" src="_images/7a8e0dc14189d1abfed3dfaa31438bce12fe0ce33040a5b60d6f8e86a9b4606f.png" />
+<img alt="_images/e47217bab97995aa84be4e516c1a05a025bf5101f8f223ad7fd1fa971f251de2.png" src="_images/e47217bab97995aa84be4e516c1a05a025bf5101f8f223ad7fd1fa971f251de2.png" />
 </div>
 </div>
 </section>
@@ -2172,40 +2198,53 @@ DAYS_LAST_PHONE_CHANGE               1.264442e-37                         0.0  -
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Seleccionar las 5 variables categóricas más correlacionadas con TARGET</span>
-<span class="n">top_categorical_vars</span> <span class="o">=</span> <span class="n">chi2_df</span><span class="p">[</span><span class="s2">&quot;Variable&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">os</span>
 
-<span class="c1"># Verificar si las variables están en train_final</span>
+<span class="c1"># Crear carpeta de salida</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;graficos_categoricos&quot;</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Seleccionar top 5 variables categóricas con mayor chi2</span>
+<span class="n">top_categorical_vars</span> <span class="o">=</span> <span class="n">chi2_df</span><span class="p">[</span><span class="s2">&quot;Variable&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 <span class="n">top_categorical_vars</span> <span class="o">=</span> <span class="p">[</span><span class="n">var</span> <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">top_categorical_vars</span> <span class="k">if</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">train_final</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
 
-<span class="c1"># Generar gráficos individuales para cada variable categórica más correlacionada con TARGET</span>
+<span class="c1"># Bucle de gráficos categóricos</span>
 <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">top_categorical_vars</span><span class="p">:</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-    
-    <span class="c1"># Seleccionar las 10 categorías más frecuentes</span>
+    <span class="c1"># Seleccionar top 10 categorías más comunes</span>
     <span class="n">top_categories</span> <span class="o">=</span> <span class="n">train_final</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
-    
-    <span class="c1"># Filtrar el DataFrame para incluir solo esas categorías</span>
     <span class="n">filtered_data</span> <span class="o">=</span> <span class="n">train_final</span><span class="p">[</span><span class="n">train_final</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">top_categories</span><span class="p">)]</span>
-    
-    <span class="c1"># Graficar</span>
-    <span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">filtered_data</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">var</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;TARGET&quot;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;coolwarm&quot;</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">top_categories</span><span class="p">)</span>
-    
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span>
+        <span class="n">data</span><span class="o">=</span><span class="n">filtered_data</span><span class="p">,</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">var</span><span class="p">,</span>
+        <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;TARGET&quot;</span><span class="p">,</span>
+        <span class="n">palette</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s2">&quot;steelblue&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;indianred&quot;</span><span class="p">}</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Estética</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Distribución de TARGET en </span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Cantidad&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;TARGET&quot;</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;No incumplió (0)&quot;</span><span class="p">,</span> <span class="s2">&quot;Incumplió (1)&quot;</span><span class="p">])</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;TARGET&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+    <span class="c1"># Guardar como imagen</span>
+    <span class="n">clean_var</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;graficos_categoricos/</span><span class="si">{</span><span class="n">clean_var</span><span class="si">}</span><span class="s2">.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/22eed837e0a2917b2ff2aaf696fbae2fe19140fa048a767cab0cd9b5a65e4e57.png" src="_images/22eed837e0a2917b2ff2aaf696fbae2fe19140fa048a767cab0cd9b5a65e4e57.png" />
-<img alt="_images/e2493e291d8c9212d837d61c00bf78d25448b32a401e5a4b4a5818bc0c195bc6.png" src="_images/e2493e291d8c9212d837d61c00bf78d25448b32a401e5a4b4a5818bc0c195bc6.png" />
-<img alt="_images/898f6050573a756b5cfc3ba1433b8e0ae518ca971bbfd99ebc5344d3add27402.png" src="_images/898f6050573a756b5cfc3ba1433b8e0ae518ca971bbfd99ebc5344d3add27402.png" />
-<img alt="_images/d08681bd95cf26a995f2d16ba62bfa3115bea85289e8f26eef270e19c0a96f1f.png" src="_images/d08681bd95cf26a995f2d16ba62bfa3115bea85289e8f26eef270e19c0a96f1f.png" />
-<img alt="_images/2ebfa08dd0e339a763aa66b80df025d2bdd39f9019cadf0fc5157d4ca8b1899b.png" src="_images/2ebfa08dd0e339a763aa66b80df025d2bdd39f9019cadf0fc5157d4ca8b1899b.png" />
+<img alt="_images/4e7026a3399c3ddb1b46e6c3ff9ba5b857ea5cf2ce457e63de63271ab62129ba.png" src="_images/4e7026a3399c3ddb1b46e6c3ff9ba5b857ea5cf2ce457e63de63271ab62129ba.png" />
+<img alt="_images/57f26b3abf3fda7484baf3e22642ca09f9af33c5c23990bf3e72cdcff7f96abe.png" src="_images/57f26b3abf3fda7484baf3e22642ca09f9af33c5c23990bf3e72cdcff7f96abe.png" />
+<img alt="_images/599243899215963e3e6fa27deaa1187285fbf3b9c1b90092dc339a7b71dbf0a6.png" src="_images/599243899215963e3e6fa27deaa1187285fbf3b9c1b90092dc339a7b71dbf0a6.png" />
+<img alt="_images/4fd0f8260203ff7512cff6d459b24655893071133b2f737ce9d53fd42fd68a23.png" src="_images/4fd0f8260203ff7512cff6d459b24655893071133b2f737ce9d53fd42fd68a23.png" />
+<img alt="_images/12441de6c0427b200222fc2666fd6a5e125b25e1314820c6d3839734d8cd1ba5.png" src="_images/12441de6c0427b200222fc2666fd6a5e125b25e1314820c6d3839734d8cd1ba5.png" />
 </div>
 </div>
 </section>
@@ -2253,835 +2292,6 @@ DAYS_LAST_PHONE_CHANGE               1.264442e-37                         0.0  -
 </section>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="limpieza-de-datos">
-<h1>Limpieza de datos<a class="headerlink" href="#limpieza-de-datos" title="Link to this heading">#</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
-
-<span class="c1"># Seleccionar solo las columnas relevantes</span>
-<span class="n">selected_columns</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;TARGET&#39;</span><span class="p">,</span> <span class="s1">&#39;EXT_SOURCE_1&#39;</span><span class="p">,</span> <span class="s1">&#39;EXT_SOURCE_2&#39;</span><span class="p">,</span> <span class="s1">&#39;EXT_SOURCE_3&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;AMT_CREDIT_x&#39;</span><span class="p">,</span> <span class="s1">&#39;AMT_ANNUITY_x&#39;</span><span class="p">,</span> <span class="s1">&#39;AMT_GOODS_PRICE_x&#39;</span><span class="p">,</span> <span class="s1">&#39;AMT_INCOME_TOTAL&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;DAYS_BIRTH&#39;</span><span class="p">,</span> <span class="s1">&#39;DAYS_EMPLOYED&#39;</span><span class="p">,</span> <span class="s1">&#39;DAYS_LAST_PHONE_CHANGE&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;REGION_RATING_CLIENT&#39;</span><span class="p">,</span> <span class="s1">&#39;REGION_RATING_CLIENT_W_CITY&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;NAME_CONTRACT_TYPE_x&#39;</span><span class="p">,</span> <span class="s1">&#39;CODE_GENDER&#39;</span><span class="p">,</span> <span class="s1">&#39;NAME_PRODUCT_TYPE&#39;</span><span class="p">,</span> <span class="s1">&#39;NAME_YIELD_GROUP&#39;</span>
-<span class="p">]</span>
-
-<span class="n">df_filtered</span> <span class="o">=</span> <span class="n">train_final</span><span class="p">[</span><span class="n">selected_columns</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-
-<span class="c1"># Separar variable objetivo y características</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">&#39;TARGET&#39;</span><span class="p">)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;TARGET&#39;</span><span class="p">]</span>
-
-<span class="c1"># Separación 60% train, 20% val, 20% test</span>
-<span class="n">X_train_val</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train_val</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
-    <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
-
-<span class="n">X_train</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_val</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
-    <span class="n">X_train_val</span><span class="p">,</span> <span class="n">y_train_val</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y_train_val</span><span class="p">)</span>
-
-<span class="c1"># Verificación de tamaños</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Train:&quot;</span><span class="p">,</span> <span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Val:  &quot;</span><span class="p">,</span> <span class="n">X_val</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test: &quot;</span><span class="p">,</span> <span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train: (858093, 16)
-Val:   (286031, 16)
-Test:  (286031, 16)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">imblearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span> <span class="k">as</span> <span class="n">ImbPipeline</span>
-<span class="kn">from</span> <span class="nn">imblearn.over_sampling</span> <span class="kn">import</span> <span class="n">SMOTE</span><span class="p">,</span> <span class="n">ADASYN</span>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
-<span class="kn">from</span> <span class="nn">sklearn.compose</span> <span class="kn">import</span> <span class="n">ColumnTransformer</span>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span><span class="p">,</span> <span class="n">OneHotEncoder</span>
-<span class="kn">from</span> <span class="nn">sklearn.impute</span> <span class="kn">import</span> <span class="n">SimpleImputer</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span><span class="p">,</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">roc_auc_score</span><span class="p">,</span> <span class="n">roc_curve</span>
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
-
-<span class="c1"># Variables</span>
-<span class="n">numeric_features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;EXT_SOURCE_1&#39;</span><span class="p">,</span> <span class="s1">&#39;EXT_SOURCE_2&#39;</span><span class="p">,</span> <span class="s1">&#39;EXT_SOURCE_3&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;AMT_CREDIT_x&#39;</span><span class="p">,</span> <span class="s1">&#39;AMT_ANNUITY_x&#39;</span><span class="p">,</span> <span class="s1">&#39;AMT_GOODS_PRICE_x&#39;</span><span class="p">,</span> <span class="s1">&#39;AMT_INCOME_TOTAL&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;DAYS_BIRTH&#39;</span><span class="p">,</span> <span class="s1">&#39;DAYS_EMPLOYED&#39;</span><span class="p">,</span> <span class="s1">&#39;DAYS_LAST_PHONE_CHANGE&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;REGION_RATING_CLIENT&#39;</span><span class="p">,</span> <span class="s1">&#39;REGION_RATING_CLIENT_W_CITY&#39;</span><span class="p">]</span>
-
-<span class="n">categorical_features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;NAME_CONTRACT_TYPE_x&#39;</span><span class="p">,</span> <span class="s1">&#39;CODE_GENDER&#39;</span><span class="p">,</span> 
-                        <span class="s1">&#39;NAME_PRODUCT_TYPE&#39;</span><span class="p">,</span> <span class="s1">&#39;NAME_YIELD_GROUP&#39;</span><span class="p">]</span>
-
-<span class="c1"># Preprocesamiento para variables numéricas</span>
-<span class="n">numeric_transformer</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="p">[</span>
-    <span class="p">(</span><span class="s1">&#39;imputer&#39;</span><span class="p">,</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;median&#39;</span><span class="p">)),</span>
-    <span class="p">(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">())</span>
-<span class="p">])</span>
-
-<span class="c1"># Preprocesamiento para variables categóricas</span>
-<span class="n">categorical_transformer</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="p">[</span>
-    <span class="p">(</span><span class="s1">&#39;imputer&#39;</span><span class="p">,</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;most_frequent&#39;</span><span class="p">)),</span>
-    <span class="p">(</span><span class="s1">&#39;onehot&#39;</span><span class="p">,</span> <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">handle_unknown</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">))</span>
-<span class="p">])</span>
-
-<span class="c1"># Combinación</span>
-<span class="n">preprocessor</span> <span class="o">=</span> <span class="n">ColumnTransformer</span><span class="p">(</span>
-    <span class="n">transformers</span><span class="o">=</span><span class="p">[</span>
-        <span class="p">(</span><span class="s1">&#39;num&#39;</span><span class="p">,</span> <span class="n">numeric_transformer</span><span class="p">,</span> <span class="n">numeric_features</span><span class="p">),</span>
-        <span class="p">(</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="n">categorical_transformer</span><span class="p">,</span> <span class="n">categorical_features</span><span class="p">)</span>
-    <span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="despliegue-de-modelos">
-<h1>Despliegue de modelos<a class="headerlink" href="#despliegue-de-modelos" title="Link to this heading">#</a></h1>
-<section id="modelo-de-regresion-logistica-con-penalizacion-l1-y-l2">
-<h2>Modelo de regresión logística con penalización L1 Y L2<a class="headerlink" href="#modelo-de-regresion-logistica-con-penalizacion-l1-y-l2" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">balanceador</span> <span class="o">=</span> <span class="n">SMOTE</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">modelo</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span>
-    <span class="n">penalty</span><span class="o">=</span><span class="s1">&#39;l2&#39;</span><span class="p">,</span>
-    <span class="n">solver</span><span class="o">=</span><span class="s1">&#39;saga&#39;</span><span class="p">,</span>
-    <span class="n">class_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
-    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">ImbPipeline</span><span class="p">([</span>
-    <span class="p">(</span><span class="s1">&#39;preprocessing&#39;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">&#39;balanceo&#39;</span><span class="p">,</span> <span class="n">balanceador</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">&#39;classifier&#39;</span><span class="p">,</span> <span class="n">modelo</span><span class="p">)</span>
-<span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="n">pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="n">tiempo</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_val</span><span class="p">)</span>
-<span class="n">y_prob</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_val</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tiempo de ejecución: </span><span class="si">{</span><span class="n">tiempo</span><span class="si">}</span><span class="s2"> segundos&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;AUC:&quot;</span><span class="p">,</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_prob</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Matriz de confusión:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tiempo de ejecución: 265.2 segundos
-              precision    recall  f1-score   support
-
-           0       0.96      0.68      0.79    261363
-           1       0.16      0.66      0.26     24668
-
-    accuracy                           0.68    286031
-   macro avg       0.56      0.67      0.53    286031
-weighted avg       0.89      0.68      0.75    286031
-
-AUC: 0.7304343763437422
-Matriz de confusión:
- [[177681  83682]
- [  8279  16389]]
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">thresholds</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_prob</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;AUC = </span><span class="si">{</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span><span class="w"> </span><span class="n">y_prob</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;False Positive Rate&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;True Positive Rate&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Curva ROC - Regresión Logística&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/ae2341077f17c30bc6c8fd2dab93ce545ffb7606ad89991bb107f519b2483ad9.png" src="_images/ae2341077f17c30bc6c8fd2dab93ce545ffb7606ad89991bb107f519b2483ad9.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">modelo</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span>
-    <span class="n">penalty</span><span class="o">=</span><span class="s1">&#39;l1&#39;</span><span class="p">,</span>
-    <span class="n">solver</span><span class="o">=</span><span class="s1">&#39;saga&#39;</span><span class="p">,</span>
-    <span class="n">class_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
-    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">ImbPipeline</span><span class="p">([</span>
-    <span class="p">(</span><span class="s1">&#39;preprocessing&#39;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">&#39;balanceo&#39;</span><span class="p">,</span> <span class="n">balanceador</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">&#39;classifier&#39;</span><span class="p">,</span> <span class="n">modelo</span><span class="p">)</span>
-<span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="n">pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="n">tiempo</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_val</span><span class="p">)</span>
-<span class="n">y_prob</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_val</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tiempo de ejecución: </span><span class="si">{</span><span class="n">tiempo</span><span class="si">}</span><span class="s2"> segundos&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;AUC:&quot;</span><span class="p">,</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_prob</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Matriz de confusión:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tiempo de ejecución: 292.63 segundos
-              precision    recall  f1-score   support
-
-           0       0.96      0.68      0.79    261363
-           1       0.16      0.66      0.26     24668
-
-    accuracy                           0.68    286031
-   macro avg       0.56      0.67      0.53    286031
-weighted avg       0.89      0.68      0.75    286031
-
-AUC: 0.7304344968592604
-Matriz de confusión:
- [[177681  83682]
- [  8279  16389]]
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">thresholds</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_prob</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;AUC = </span><span class="si">{</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span><span class="w"> </span><span class="n">y_prob</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;False Positive Rate&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;True Positive Rate&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Curva ROC - Regresión Logística L1&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/0b012a5a16a0a7a06a8c6c475dbd67ee325a67c92c50137159397b59fe491b5f.png" src="_images/0b012a5a16a0a7a06a8c6c475dbd67ee325a67c92c50137159397b59fe491b5f.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">balanceador</span> <span class="o">=</span> <span class="n">ADASYN</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-
-<span class="n">modelo</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span>
-    <span class="n">penalty</span><span class="o">=</span><span class="s1">&#39;l2&#39;</span><span class="p">,</span>         
-    <span class="n">solver</span><span class="o">=</span><span class="s1">&#39;saga&#39;</span><span class="p">,</span>
-    <span class="n">class_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
-    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
-<span class="p">)</span>
-
-<span class="n">pipeline</span> <span class="o">=</span> <span class="n">ImbPipeline</span><span class="p">([</span>
-    <span class="p">(</span><span class="s1">&#39;preprocessing&#39;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">&#39;balanceo&#39;</span><span class="p">,</span> <span class="n">balanceador</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">&#39;classifier&#39;</span><span class="p">,</span> <span class="n">modelo</span><span class="p">)</span>
-<span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="n">pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="n">tiempo</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_val</span><span class="p">)</span>
-<span class="n">y_prob</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_val</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tiempo de ejecución: </span><span class="si">{</span><span class="n">tiempo</span><span class="si">}</span><span class="s2"> segundos&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;AUC:&quot;</span><span class="p">,</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_prob</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Matriz de confusión:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tiempo de ejecución: 362.42 segundos
-              precision    recall  f1-score   support
-
-           0       0.96      0.65      0.77    261363
-           1       0.16      0.69      0.26     24668
-
-    accuracy                           0.65    286031
-   macro avg       0.56      0.67      0.51    286031
-weighted avg       0.89      0.65      0.73    286031
-
-AUC: 0.7289914097661561
-Matriz de confusión:
- [[169370  91993]
- [  7618  17050]]
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">thresholds</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_prob</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;AUC = </span><span class="si">{</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span><span class="w"> </span><span class="n">y_prob</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;False Positive Rate&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;True Positive Rate&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Curva ROC - Regresión Logística L2 balanceo ADASYN&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/008591204e69a40b8e58c0abf2b323b89020abc05c0740fffd35ab319c5a4b18.png" src="_images/008591204e69a40b8e58c0abf2b323b89020abc05c0740fffd35ab319c5a4b18.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">modelo</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span>
-    <span class="n">penalty</span><span class="o">=</span><span class="s1">&#39;l2&#39;</span><span class="p">,</span>         
-    <span class="n">solver</span><span class="o">=</span><span class="s1">&#39;saga&#39;</span><span class="p">,</span>
-    <span class="n">class_weight</span><span class="o">=</span><span class="s1">&#39;balanced&#39;</span><span class="p">,</span>
-    <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
-    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
-<span class="p">)</span>
-
-<span class="n">pipeline</span> <span class="o">=</span> <span class="n">ImbPipeline</span><span class="p">([</span>
-    <span class="p">(</span><span class="s1">&#39;preprocessing&#39;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">&#39;classifier&#39;</span><span class="p">,</span> <span class="n">modelo</span><span class="p">)</span>
-<span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="n">pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="n">tiempo</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\ASUS\anaconda3\Lib\site-packages\sklearn\linear_model\_sag.py:350: ConvergenceWarning: The max_iter was reached which means the coef_ did not converge
-  warnings.warn(
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="modelo-de-clasificacion-naive-bayes">
-<h2>Modelo de clasificación Naive Bayes<a class="headerlink" href="#modelo-de-clasificacion-naive-bayes" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">GaussianNB</span>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
-<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
-<span class="kn">from</span> <span class="nn">sklearn.compose</span> <span class="kn">import</span> <span class="n">ColumnTransformer</span>
-<span class="kn">from</span> <span class="nn">sklearn.impute</span> <span class="kn">import</span> <span class="n">SimpleImputer</span>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">OneHotEncoder</span>
-<span class="kn">import</span> <span class="nn">time</span>
-
-<span class="c1"># Ajustar preprocesamiento (usar MinMaxScaler)</span>
-<span class="n">numeric_transformer_nb</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
-    <span class="p">(</span><span class="s1">&#39;imputer&#39;</span><span class="p">,</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;median&#39;</span><span class="p">)),</span>
-    <span class="p">(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="n">MinMaxScaler</span><span class="p">())</span>
-<span class="p">])</span>
-
-<span class="n">categorical_transformer_nb</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
-    <span class="p">(</span><span class="s1">&#39;imputer&#39;</span><span class="p">,</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;most_frequent&#39;</span><span class="p">)),</span>
-    <span class="p">(</span><span class="s1">&#39;encoder&#39;</span><span class="p">,</span> <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">handle_unknown</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">))</span>
-<span class="p">])</span>
-
-<span class="n">preprocessor_nb</span> <span class="o">=</span> <span class="n">ColumnTransformer</span><span class="p">([</span>
-    <span class="p">(</span><span class="s1">&#39;num&#39;</span><span class="p">,</span> <span class="n">numeric_transformer_nb</span><span class="p">,</span> <span class="n">numeric_features</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="n">categorical_transformer_nb</span><span class="p">,</span> <span class="n">categorical_features</span><span class="p">)</span>
-<span class="p">])</span>
-
-<span class="c1"># Pipeline completo</span>
-<span class="n">pipeline_nb</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
-    <span class="p">(</span><span class="s1">&#39;preprocessing&#39;</span><span class="p">,</span> <span class="n">preprocessor_nb</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">&#39;classifier&#39;</span><span class="p">,</span> <span class="n">GaussianNB</span><span class="p">())</span>
-<span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Entrenamiento + tiempo</span>
-<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="n">pipeline_nb</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="n">tiempo</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Predicción</span>
-<span class="n">y_pred</span> <span class="o">=</span> <span class="n">pipeline_nb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_val</span><span class="p">)</span>
-<span class="n">y_prob</span> <span class="o">=</span> <span class="n">pipeline_nb</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_val</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
-
-<span class="c1"># Evaluación</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span><span class="p">,</span> <span class="n">roc_auc_score</span><span class="p">,</span> <span class="n">confusion_matrix</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;⏱ Tiempo de entrenamiento: </span><span class="si">{</span><span class="n">tiempo</span><span class="si">}</span><span class="s2"> s&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;AUC:&quot;</span><span class="p">,</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_prob</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Matriz de confusión:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
-
-<span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">thresholds</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_prob</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;AUC = </span><span class="si">{</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span><span class="w"> </span><span class="n">y_prob</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;False Positive Rate&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;True Positive Rate&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Curva ROC - Naive Bayes&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span><span class="n">v</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>⏱ Tiempo de entrenamiento: 3.18 s
-              precision    recall  f1-score   support
-
-           0       0.96      0.24      0.38    261363
-           1       0.10      0.89      0.18     24668
-
-    accuracy                           0.29    286031
-   macro avg       0.53      0.56      0.28    286031
-weighted avg       0.88      0.29      0.36    286031
-
-AUC: 0.6800831220314744
-Matriz de confusión:
- [[ 62269 199094]
- [  2687  21981]]
-</pre></div>
-</div>
-<img alt="_images/d8c1e400bd733a763a6c2838ef81127ee92068b7de9c2cc019ca0d98bfb04cfc.png" src="_images/d8c1e400bd733a763a6c2838ef81127ee92068b7de9c2cc019ca0d98bfb04cfc.png" />
-</div>
-</div>
-</section>
-<section id="modelo-de-clasificacion-random-forest">
-<h2>Modelo de clasificación Random Forest<a class="headerlink" href="#modelo-de-clasificacion-random-forest" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
-<span class="kn">from</span> <span class="nn">imblearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span> <span class="k">as</span> <span class="n">ImbPipeline</span>
-<span class="kn">from</span> <span class="nn">imblearn.over_sampling</span> <span class="kn">import</span> <span class="n">SMOTE</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span><span class="p">,</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">roc_auc_score</span><span class="p">,</span> <span class="n">roc_curve</span>
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-<span class="n">balanceador</span> <span class="o">=</span> <span class="n">SMOTE</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-
-<span class="c1"># Definir modelo</span>
-<span class="n">modelo_rf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span>
-    <span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-    <span class="n">max_depth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">class_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># Cambiar a &#39;balanced&#39; si no usas SMOTE</span>
-    <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
-    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
-<span class="p">)</span>
-
-<span class="c1"># Pipeline completo</span>
-<span class="n">pipeline_rf</span> <span class="o">=</span> <span class="n">ImbPipeline</span><span class="p">([</span>
-    <span class="p">(</span><span class="s1">&#39;preprocessing&#39;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">&#39;balanceo&#39;</span><span class="p">,</span> <span class="n">balanceador</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">&#39;classifier&#39;</span><span class="p">,</span> <span class="n">modelo_rf</span><span class="p">)</span>
-<span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Entrenamiento + medición de tiempo</span>
-<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="n">pipeline_rf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="n">tiempo</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Predicción</span>
-<span class="n">y_pred</span> <span class="o">=</span> <span class="n">pipeline_rf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_val</span><span class="p">)</span>
-<span class="n">y_prob</span> <span class="o">=</span> <span class="n">pipeline_rf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_val</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
-
-<span class="c1"># Evaluación</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🕒 Tiempo de entrenamiento: </span><span class="si">{</span><span class="n">tiempo</span><span class="si">}</span><span class="s2"> s&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;AUC:&quot;</span><span class="p">,</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_prob</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Matriz de confusión:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
-
-<span class="c1"># Curva ROC</span>
-<span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_prob</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;AUC = </span><span class="si">{</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span><span class="w"> </span><span class="n">y_prob</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Curva ROC - Random Forest con SMOTE&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;False Positive Rate&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;True Positive Rate&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>🕒 Tiempo de entrenamiento: 144.52 s
-              precision    recall  f1-score   support
-
-           0       0.99      0.99      0.99    261363
-           1       0.93      0.89      0.91     24668
-
-    accuracy                           0.99    286031
-   macro avg       0.96      0.94      0.95    286031
-weighted avg       0.98      0.99      0.98    286031
-
-AUC: 0.9921011663208945
-Matriz de confusión:
- [[259788   1575]
- [  2701  21967]]
-</pre></div>
-</div>
-<img alt="_images/7059a4b95a4a1d7173a31b8c0e81c449025ea6727982399f75b1b1e80f4e253f.png" src="_images/7059a4b95a4a1d7173a31b8c0e81c449025ea6727982399f75b1b1e80f4e253f.png" />
-</div>
-</div>
-</section>
-<section id="modelo-de-clasificacion-xgboost">
-<h2>Modelo de clasificación XGBoost<a class="headerlink" href="#modelo-de-clasificacion-xgboost" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">xgboost</span> <span class="kn">import</span> <span class="n">XGBClassifier</span>
-
-<span class="n">modelo</span> <span class="o">=</span> <span class="n">XGBClassifier</span><span class="p">(</span>
-    <span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-    <span class="n">use_label_encoder</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">eval_metric</span><span class="o">=</span><span class="s1">&#39;logloss&#39;</span><span class="p">,</span>
-    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
-    <span class="n">tree_method</span><span class="o">=</span><span class="s1">&#39;hist&#39;</span>  <span class="c1"># optimización recomendada</span>
-<span class="p">)</span>
-
-<span class="n">pipeline</span> <span class="o">=</span> <span class="n">ImbPipeline</span><span class="p">([</span>
-    <span class="p">(</span><span class="s1">&#39;preprocessing&#39;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">&#39;balanceo&#39;</span><span class="p">,</span> <span class="n">SMOTE</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)),</span>
-    <span class="p">(</span><span class="s1">&#39;classifier&#39;</span><span class="p">,</span> <span class="n">modelo</span><span class="p">)</span>
-<span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Entrenamiento + medición de tiempo</span>
-<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="n">pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="n">tiempo</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\ASUS\anaconda3\Lib\site-packages\xgboost\training.py:183: UserWarning: [20:24:36] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\learner.cc:738: 
-Parameters: { &quot;use_label_encoder&quot; } are not used.
-
-  bst.update(dtrain, iteration=i, fobj=obj)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Predicción</span>
-<span class="n">y_pred</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_val</span><span class="p">)</span>
-<span class="n">y_prob</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_val</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
-
-<span class="c1"># Evaluación</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🕒 Tiempo de entrenamiento: </span><span class="si">{</span><span class="n">tiempo</span><span class="si">}</span><span class="s2"> s&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;AUC:&quot;</span><span class="p">,</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_prob</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Matriz de confusión:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
-
-<span class="c1"># Curva ROC</span>
-<span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_prob</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;AUC = </span><span class="si">{</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span><span class="w"> </span><span class="n">y_prob</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Curva ROC - XGBoost con SMOTE&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;False Positive Rate&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;True Positive Rate&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>🕒 Tiempo de entrenamiento: 17.94 s
-              precision    recall  f1-score   support
-
-           0       0.94      0.88      0.91    261363
-           1       0.26      0.44      0.32     24668
-
-    accuracy                           0.84    286031
-   macro avg       0.60      0.66      0.62    286031
-weighted avg       0.88      0.84      0.86    286031
-
-AUC: 0.7715177280489451
-Matriz de confusión:
- [[229903  31460]
- [ 13848  10820]]
-</pre></div>
-</div>
-<img alt="_images/080ee744f72aa7616401052dfb36f37fa36ef26f57b349cd3beb353d70490ac0.png" src="_images/080ee744f72aa7616401052dfb36f37fa36ef26f57b349cd3beb353d70490ac0.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">ImbPipeline</span><span class="p">([</span>
-    <span class="p">(</span><span class="s1">&#39;preprocessing&#39;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">&#39;balanceo&#39;</span><span class="p">,</span> <span class="n">ADASYN</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)),</span>
-    <span class="p">(</span><span class="s1">&#39;classifier&#39;</span><span class="p">,</span> <span class="n">modelo</span><span class="p">)</span>
-<span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Entrenamiento + medición de tiempo</span>
-<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="n">pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="n">tiempo</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\ASUS\anaconda3\Lib\site-packages\xgboost\training.py:183: UserWarning: [20:28:52] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\learner.cc:738: 
-Parameters: { &quot;use_label_encoder&quot; } are not used.
-
-  bst.update(dtrain, iteration=i, fobj=obj)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Predicción</span>
-<span class="n">y_pred</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_val</span><span class="p">)</span>
-<span class="n">y_prob</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_val</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
-
-<span class="c1"># Evaluación</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🕒 Tiempo de entrenamiento: </span><span class="si">{</span><span class="n">tiempo</span><span class="si">}</span><span class="s2"> s&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;AUC:&quot;</span><span class="p">,</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_prob</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Matriz de confusión:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
-
-<span class="c1"># Curva ROC</span>
-<span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_prob</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;AUC = </span><span class="si">{</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span><span class="w"> </span><span class="n">y_prob</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Curva ROC - XGBoost con ADASYN&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;False Positive Rate&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;True Positive Rate&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>🕒 Tiempo de entrenamiento: 116.73 s
-              precision    recall  f1-score   support
-
-           0       0.94      0.89      0.91    261363
-           1       0.24      0.38      0.29     24668
-
-    accuracy                           0.84    286031
-   macro avg       0.59      0.63      0.60    286031
-weighted avg       0.88      0.84      0.86    286031
-
-AUC: 0.7572558391848518
-Matriz de confusión:
- [[231788  29575]
- [ 15403   9265]]
-</pre></div>
-</div>
-<img alt="_images/103fbadb7622e6206c8ee6039138c350638e407ea95007460bd3c3d89f01c3bc.png" src="_images/103fbadb7622e6206c8ee6039138c350638e407ea95007460bd3c3d89f01c3bc.png" />
-</div>
-</div>
-</section>
-<section id="modelo-de-clasificacion-svm">
-<h2>Modelo de clasificación SVM<a class="headerlink" href="#modelo-de-clasificacion-svm" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">SGDClassifier</span>
-<span class="kn">from</span> <span class="nn">imblearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span> <span class="k">as</span> <span class="n">ImbPipeline</span>
-<span class="kn">from</span> <span class="nn">imblearn.over_sampling</span> <span class="kn">import</span> <span class="n">SMOTE</span>
-<span class="kn">import</span> <span class="nn">time</span>
-
-<span class="c1"># Definir modelo SVM optimizada con SGD</span>
-<span class="n">modelo_svm</span> <span class="o">=</span> <span class="n">SGDClassifier</span><span class="p">(</span>
-    <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;hinge&#39;</span><span class="p">,</span>          <span class="c1"># SVM lineal</span>
-    <span class="n">penalty</span><span class="o">=</span><span class="s1">&#39;l2&#39;</span><span class="p">,</span>
-    <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
-    <span class="n">tol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span>
-    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
-    <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span>
-<span class="p">)</span>
-
-<span class="c1"># Pipeline completo</span>
-<span class="n">pipeline_svm</span> <span class="o">=</span> <span class="n">ImbPipeline</span><span class="p">([</span>
-    <span class="p">(</span><span class="s1">&#39;preprocessing&#39;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">&#39;balanceo&#39;</span><span class="p">,</span> <span class="n">SMOTE</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)),</span>
-    <span class="p">(</span><span class="s1">&#39;classifier&#39;</span><span class="p">,</span> <span class="n">modelo_svm</span><span class="p">)</span>
-<span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Entrenamiento + tiempo</span>
-<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="n">pipeline_svm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="n">tiempo</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Predicción y evaluación</span>
-<span class="n">y_pred</span> <span class="o">=</span> <span class="n">pipeline_svm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_val</span><span class="p">)</span>
-<span class="n">y_prob</span> <span class="o">=</span> <span class="n">pipeline_svm</span><span class="o">.</span><span class="n">decision_function</span><span class="p">(</span><span class="n">X_val</span><span class="p">)</span>  <span class="c1"># no hay predict_proba en SGDClassifier</span>
-
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span><span class="p">,</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">roc_auc_score</span><span class="p">,</span> <span class="n">roc_curve</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🕒 Tiempo de entrenamiento: </span><span class="si">{</span><span class="n">tiempo</span><span class="si">}</span><span class="s2"> s&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
-
-<span class="c1"># Convertimos los scores a probabilidad para ROC</span>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
-<span class="n">y_score</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">y_prob</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;AUC:&quot;</span><span class="p">,</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_score</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Matriz de confusión:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
-
-<span class="c1"># Curva ROC</span>
-<span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_score</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;AUC = </span><span class="si">{</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span><span class="w"> </span><span class="n">y_score</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Curva ROC - SVM con SGDClassifier + SMOTE&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;False Positive Rate&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;True Positive Rate&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>🕒 Tiempo de entrenamiento: 16.51 s
-              precision    recall  f1-score   support
-
-           0       0.95      0.71      0.82    261363
-           1       0.17      0.63      0.27     24668
-
-    accuracy                           0.71    286031
-   macro avg       0.56      0.67      0.54    286031
-weighted avg       0.89      0.71      0.77    286031
-
-AUC: 0.7299780242480709
-Matriz de confusión:
- [[186336  75027]
- [  9187  15481]]
-</pre></div>
-</div>
-<img alt="_images/2820065465998ff20084d48fa91d2a503e1a8220b037444d72632f4018ba4708.png" src="_images/2820065465998ff20084d48fa91d2a503e1a8220b037444d72632f4018ba4708.png" />
-</div>
-</div>
-</section>
-</section>
 
     <script type="text/x-thebe-config">
     {
@@ -3123,11 +2333,11 @@ Matriz de confusión:
       </div>
     </a>
     <a class="right-next"
-       href="bitcoin.html"
+       href="Modelos%20Home%20Credit.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">ANÁLISIS SERIES DE TIEMPO DE BITCOIN</p>
+        <p class="prev-next-title">Evaluación de Modelos - Home Credit Default Risk</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -3147,7 +2357,6 @@ Matriz de confusión:
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Análisis Exploratorio de Datos (EDA) - Home Credit Default Risk</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">Introducción</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivos-del-eda">Objetivos del EDA</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carga-de-datos">Carga de datos</a></li>
@@ -3218,18 +2427,6 @@ Matriz de confusión:
 </ul>
 </li>
 </ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#limpieza-de-datos">Limpieza de datos</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#despliegue-de-modelos">Despliegue de modelos</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-regresion-logistica-con-penalizacion-l1-y-l2">Modelo de regresión logística con penalización L1 Y L2</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-clasificacion-naive-bayes">Modelo de clasificación Naive Bayes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-clasificacion-random-forest">Modelo de clasificación Random Forest</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-clasificacion-xgboost">Modelo de clasificación XGBoost</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-clasificacion-svm">Modelo de clasificación SVM</a></li>
-</ul>
-</li>
-</ul>
-
   </nav></div>
 
 </div></div>
