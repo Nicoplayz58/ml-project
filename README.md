@@ -1,7 +1,5 @@
 # 🚀 Proyecto Final de Machine Learning
 
-![Banner](./banner.png)
-
 Bienvenido a nuestro **proyecto final** de Machine Learning.  
 Este repositorio contiene tanto el código fuente como la documentación en forma de **Jupyter Book**, desplegada en GitHub Pages:  
 
